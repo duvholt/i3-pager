@@ -25,6 +25,7 @@ Q_SIGNALS:
 
 private:
     QString currentScreenPrivate;
+    void poll();
 };
 
 

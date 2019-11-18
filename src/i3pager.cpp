@@ -5,10 +5,37 @@
 #include <QApplication>
 #include <QDesktopWidget>
 #include <QDebug>
+#include <future>
+
+#include <QtConcurrent/QtConcurrent>
 
 
 I3Pager::I3Pager(QObject *parent) : QObject(parent) {
     currentScreenPrivate = QString();
+    QtConcurrent::run(QThreadPool::globalInstance(), [this]() {
+        poll();
+    });
+}
+
+void I3Pager::poll() {
+    try {
+        i3ipc::connection conn;
+        conn.subscribe(i3ipc::ET_WORKSPACE | i3ipc::ET_BINDING);
+        // Handler of WORKSPACE EVENT
+        conn.signal_workspace_event.connect([this](const i3ipc::workspace_event_t&  ev) {
+            qInfo() << "workspace_event: " << (char)ev.type;
+            if (ev.current) {
+                qInfo() << "\tSwitched to #" << ev.current->num << " - \"" << QString::fromStdString(ev.current->name) << '"';
+                Q_EMIT currentScreenChanged();
+            }
+        });
+        while (true) {
+            conn.handle_event();
+        }
+    } catch (...) {
+        // TODO
+        qWarning() << "i3ipc error";
+    }
 }
 
 QStringList I3Pager::getWorkspaces() {
