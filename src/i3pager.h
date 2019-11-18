@@ -7,7 +7,6 @@
 
 class I3Pager : public QObject {
     Q_OBJECT
-    Q_PROPERTY(QString getMessage READ getMessage NOTIFY currentScreenChanged)
     Q_PROPERTY(QString currentScreen READ getCurrentScreen WRITE setCurrentScreen NOTIFY currentScreenChanged)
     Q_PROPERTY(QStringList workspaces READ getWorkspaces NOTIFY currentScreenChanged)
 
@@ -19,7 +18,6 @@ public:
     Q_INVOKABLE void activateWorkspace(QString workspace);
 
 public Q_SLOTS:
-    QString getMessage();
     QStringList getWorkspaces();
 
 Q_SIGNALS:

@@ -5,6 +5,7 @@ set(plasmoidplugin_SRCS
         i3pager.h)
 
 add_library(plasmoidplugin SHARED ${plasmoidplugin_SRCS})
+target_compile_options(plasmoidplugin PRIVATE -fexceptions)
 
 include_directories(${I3IPCpp_INCLUDE_DIRS})
 link_directories(${I3IPCpp_LIBRARY_DIRS})
