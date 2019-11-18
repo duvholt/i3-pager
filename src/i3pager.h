@@ -4,11 +4,12 @@
 
 
 #include <QtCore/QObject>
+#include <QVariant>
 
 class I3Pager : public QObject {
     Q_OBJECT
     Q_PROPERTY(QString currentScreen READ getCurrentScreen WRITE setCurrentScreen NOTIFY currentScreenChanged)
-    Q_PROPERTY(QStringList workspaces READ getWorkspaces NOTIFY currentScreenChanged)
+    Q_PROPERTY(QVariantList workspaces READ getWorkspaces NOTIFY currentScreenChanged)
 
 public:
     explicit I3Pager(QObject *parent = 0);
@@ -18,7 +19,7 @@ public:
     Q_INVOKABLE void activateWorkspace(QString workspace);
 
 public Q_SLOTS:
-    QStringList getWorkspaces();
+    QVariantList getWorkspaces();
 
 Q_SIGNALS:
     void currentScreenChanged();

@@ -31,7 +31,7 @@ ColumnLayout {
             model: i3pager.workspaces
             Text {
                 id: workspaceText
-                text: modelData
+                text: modelData.name
                 color: "#dfdfdf"
                 leftPadding: 10
                 rightPadding: 10
@@ -42,10 +42,10 @@ ColumnLayout {
                     anchors.fill: parent
                     hoverEnabled: true
                     cursorShape: Qt.PointingHandCursor
-                    onClicked: { i3pager.activateWorkspace(modelData) }
+                    onClicked: { i3pager.activateWorkspace(modelData.name) }
                 }
                 Rectangle {
-                    color: mouseArea.containsMouse ? "#e5c07b" : "transparent"
+                    color: (modelData.visible || mouseArea.containsMouse) ? "#e5c07b" : "transparent"
                     height: 2
                     width: parent.width
                     anchors.bottom: parent.bottom

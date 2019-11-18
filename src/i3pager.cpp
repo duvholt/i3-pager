@@ -6,6 +6,7 @@
 #include <QDesktopWidget>
 #include <QDebug>
 #include <future>
+#include <QVariant>
 
 #include <QtConcurrent/QtConcurrent>
 
@@ -38,8 +39,8 @@ void I3Pager::poll() {
     }
 }
 
-QStringList I3Pager::getWorkspaces() {
-    QStringList dataList;
+QVariantList I3Pager::getWorkspaces() {
+    QVariantList dataList;
     try {
         i3ipc::connection conn;
         qInfo() << "Screen name " << this->currentScreenPrivate;
@@ -48,7 +49,10 @@ QStringList I3Pager::getWorkspaces() {
             qInfo() << "name " << QString::fromStdString(workspace->name);
             qInfo() << "out " << QString::fromStdString(workspace->output);
             if(QString::fromStdString(workspace->output) == this->currentScreenPrivate) {
-                dataList.append(QString::fromStdString(workspace->name));
+                QMap<QString, QVariant> workspaceData;
+                workspaceData.insert("name", QString::fromStdString(workspace->name));
+                workspaceData.insert("visible", workspace->visible);
+                dataList.append(workspaceData);
             }
         }
     } catch (...) {
