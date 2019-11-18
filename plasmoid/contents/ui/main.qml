@@ -45,7 +45,15 @@ ColumnLayout {
                     onClicked: { i3pager.activateWorkspace(modelData.name) }
                 }
                 Rectangle {
-                    color: (modelData.visible || mouseArea.containsMouse) ? "#e5c07b" : "transparent"
+                    function getColor() {
+                        if (mouseArea.containsMouse) {
+                            return "#ffe8bd";
+                        } else if (modelData.visible) {
+                            return "#e5c07b";
+                        }
+                        return "transparent";
+                    }
+                    color: getColor()
                     height: 2
                     width: parent.width
                     anchors.bottom: parent.bottom
