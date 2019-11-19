@@ -26,39 +26,70 @@ ColumnLayout {
         id: workspaceRow
         Layout.alignment: Layout.AlignVCenter | Layout.AlignHCenter
         spacing: 0
+
         Repeater {
             id: repeater
             model: i3pager.workspaces
-            Text {
-                id: workspaceText
-                text: modelData.name
-                color: "#dfdfdf"
-                leftPadding: 10
-                rightPadding: 10
-                topPadding: 6
-                bottomPadding: 6
-                font.pixelSize: 16
-                font.family: "Noto Sans"
-                MouseArea {
-                    id: mouseArea
-                    anchors.fill: parent
-                    hoverEnabled: true
-                    cursorShape: Qt.PointingHandCursor
-                    onClicked: { i3pager.activateWorkspace(modelData.name) }
+
+            MouseArea {
+                id: mouseArea
+                hoverEnabled: true
+                cursorShape: Qt.PointingHandCursor
+                onClicked: { i3pager.activateWorkspace(modelData.id) }
+
+                width: textRow.width
+                height: textRow.height
+
+                RowLayout {
+                    id: textRow
+                    Text {
+                        font.pixelSize: 15
+                        leftPadding: 10
+                        topPadding: 5
+                        bottomPadding: 8
+                        font.family: "Noto Sans"
+                        color: "#dfdfdf"
+                        text: modelData.index
+                        Layout.alignment: Qt.AlignHCenter
+                    }
+                    Label {
+                        id: icon
+                        rightPadding: 3
+                        leftPadding: 3
+                        bottomPadding: 2
+                        font.pixelSize: 15
+                        font.family: "Font Awesome 5 Free Solid"
+                        font.styleName: "Solid"
+                        color: "#dfdfdf"
+                        text: modelData.icon
+                        Layout.alignment: Qt.AlignHCenter
+                    }
+                    Text {
+                        topPadding: 5
+                        bottomPadding: 8
+                        rightPadding: 10
+                        font.pixelSize: 15
+                        font.family: "Noto Sans"
+                        color: "#dfdfdf"
+                        text: modelData.name
+                        Layout.alignment: Qt.AlignHCenter
+                    }
                 }
                 Rectangle {
                     function getColor() {
-                        if (mouseArea.containsMouse) {
-                            return "#ffe8bd";
+                        if(mouseArea.containsMouse && modelData.visible) {
+                            return "#d19a66";
                         } else if (modelData.visible) {
                             return "#e5c07b";
+                        } else if (mouseArea.containsMouse) {
+                            return "#56b6c2";
                         }
                         return "transparent";
                     }
                     color: getColor()
-                    height: 2
+                    height: 3
                     width: parent.width
-                    anchors.bottom: parent.bottom
+                    anchors.bottom: textRow.bottom
                 }
             }
         }
