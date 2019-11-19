@@ -35,8 +35,10 @@ ColumnLayout {
                 color: "#dfdfdf"
                 leftPadding: 10
                 rightPadding: 10
-                topPadding: 5
-                bottomPadding: 5
+                topPadding: 6
+                bottomPadding: 6
+                font.pixelSize: 16
+                font.family: "Noto Sans"
                 MouseArea {
                     id: mouseArea
                     anchors.fill: parent
