@@ -10,6 +10,7 @@ import I3Pager 1.0
 ColumnLayout {
     id: root
     Plasmoid.preferredRepresentation: Plasmoid.fullRepresentation
+    Layout.fillHeight: true
     spacing: 0
 
     I3Pager {
@@ -38,41 +39,47 @@ ColumnLayout {
                 onClicked: { i3pager.activateWorkspace(modelData.id) }
 
                 width: textRow.width
-                height: textRow.height
+                height: root.height
 
                 RowLayout {
                     id: textRow
+                    height: parent.height
                     Text {
-                        font.pixelSize: 15
                         leftPadding: 10
-                        topPadding: 5
-                        bottomPadding: 8
                         font.family: "Noto Sans"
+                        height: textRow.height
+                        minimumPixelSize: 10
+                        font.pixelSize: 15
+                        fontSizeMode: Text.VerticalFit
                         color: "#dfdfdf"
                         text: modelData.index
-                        Layout.alignment: Qt.AlignHCenter
+                        verticalAlignment: Text.AlignHCenter
                     }
                     Label {
                         id: icon
                         rightPadding: 3
                         leftPadding: 3
-                        bottomPadding: 2
+                        bottomPadding: 0
+                        height: textRow.height
+                        minimumPixelSize: 10
                         font.pixelSize: 15
+                        fontSizeMode: Text.VerticalFit
                         font.family: "Font Awesome 5 Free Solid"
                         font.styleName: "Solid"
                         color: "#dfdfdf"
                         text: modelData.icon
-                        Layout.alignment: Qt.AlignHCenter
+                        verticalAlignment: Text.AlignHCenter
                     }
                     Text {
-                        topPadding: 5
-                        bottomPadding: 8
                         rightPadding: 10
+                        height: textRow.height
+                        minimumPixelSize: 10
                         font.pixelSize: 15
+                        fontSizeMode: Text.VerticalFit
                         font.family: "Noto Sans"
                         color: "#dfdfdf"
                         text: modelData.name
-                        Layout.alignment: Qt.AlignHCenter
+                        verticalAlignment: Text.AlignHCenter
                     }
                 }
                 Rectangle {
@@ -89,7 +96,8 @@ ColumnLayout {
                     color: getColor()
                     height: 3
                     width: parent.width
-                    anchors.bottom: textRow.bottom
+                    anchors.bottom: parent.bottom
+                    anchors.bottomMargin: 1
                 }
             }
         }
