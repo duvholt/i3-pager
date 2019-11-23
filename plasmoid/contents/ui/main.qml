@@ -26,7 +26,7 @@ ColumnLayout {
     Row  {
         id: workspaceRow
         Layout.alignment: Layout.AlignVCenter | Layout.AlignHCenter
-        spacing: 0
+        spacing: 2
 
         Repeater {
             id: repeater
