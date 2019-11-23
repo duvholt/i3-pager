@@ -47,21 +47,6 @@ void I3Pager::poll() {
     }
 }
 
-QString getIcon(QString index) {
-    if (index == QString("1")) {
-        return "";
-    } else if (index == QString("2")) {
-        return "";
-    } else if (index == QString("3")) {
-        return "";
-    } else if (index == QString("4")) {
-        return "";
-    } else if (index == QString("5")) {
-        return "";
-    }
-    return "";
-}
-
 QVariantList I3Pager::getWorkspaces() {
     QVariantList dataList;
     try {
@@ -77,11 +62,12 @@ QVariantList I3Pager::getWorkspaces() {
                 auto splitName = wsName.split(':');
                 auto index = splitName[0];
                 auto name = splitName.size() == 1 ? splitName[0] : splitName[1];
+                auto icon = splitName.size() == 3 ? splitName[2] : "";
 
                 workspaceData.insert("id", wsName);
                 workspaceData.insert("index", index);
                 workspaceData.insert("name", name);
-                workspaceData.insert("icon", getIcon(index));
+                workspaceData.insert("icon", icon);
                 workspaceData.insert("visible", workspace->visible);
 
                 dataList.append(workspaceData);
