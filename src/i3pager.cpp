@@ -16,14 +16,14 @@ I3Pager::I3Pager(QObject *parent) : QObject(parent) {
     mode = "default";
     QtConcurrent::run(QThreadPool::globalInstance(), [this]() {
         while (true) {
-            poll();
+            handleI3Events();
             qWarning() << "Lost ipc connection";
             QThread::sleep(10);
         }
     });
 }
 
-void I3Pager::poll() {
+void I3Pager::handleI3Events() {
     try {
         i3ipc::connection conn;
         conn.subscribe(i3ipc::ET_WORKSPACE | i3ipc::ET_BINDING | i3ipc::ET_MODE);

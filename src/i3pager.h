@@ -30,7 +30,7 @@ Q_SIGNALS:
 private:
     QString currentScreenPrivate;
     QString mode;
-    void poll();
+    void handleI3Events();
 };
 
 
