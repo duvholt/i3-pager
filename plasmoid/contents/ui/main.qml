@@ -101,5 +101,27 @@ ColumnLayout {
                 }
             }
         }
+        Item {
+            width: modeText.width
+            height: modeText.height
+            anchors.verticalCenter: parent.verticalCenter
+            visible: i3pager.mode != "default"
+            Rectangle {
+                color: "#e5c07b"
+                height: parent.height
+                width: parent.width
+            }
+            Text {
+                id: modeText
+                rightPadding: 10
+                leftPadding: 10
+                minimumPixelSize: 10
+                font.pixelSize: 15
+                fontSizeMode: Text.VerticalFit
+                font.family: "Noto Sans"
+                color: "#333333"
+                text: i3pager.mode
+            }
+        }
     }
 }

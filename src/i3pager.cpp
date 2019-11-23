@@ -13,6 +13,7 @@
 
 I3Pager::I3Pager(QObject *parent) : QObject(parent) {
     currentScreenPrivate = QString();
+    mode = "default";
     QtConcurrent::run(QThreadPool::globalInstance(), [this]() {
         poll();
     });
@@ -21,7 +22,7 @@ I3Pager::I3Pager(QObject *parent) : QObject(parent) {
 void I3Pager::poll() {
     try {
         i3ipc::connection conn;
-        conn.subscribe(i3ipc::ET_WORKSPACE | i3ipc::ET_BINDING);
+        conn.subscribe(i3ipc::ET_WORKSPACE | i3ipc::ET_BINDING | i3ipc::ET_MODE);
         // Handler of WORKSPACE EVENT
         conn.signal_workspace_event.connect([this](const i3ipc::workspace_event_t&  ev) {
             qInfo() << "workspace_event: " << (char)ev.type;
@@ -30,6 +31,13 @@ void I3Pager::poll() {
                 Q_EMIT currentScreenChanged();
             }
         });
+
+        conn.signal_mode_event.connect([this](const i3ipc::mode_t& mode) {
+            this->mode = QString::fromStdString(mode.change);
+            qInfo() << "mode: " << this->mode;
+            Q_EMIT modeChanged();
+        });
+
         while (true) {
             conn.handle_event();
         }
@@ -90,11 +98,11 @@ void I3Pager::activateWorkspace(QString workspace) {
     conn.send_command("workspace " + workspace.toStdString());
 }
 
-QString I3Pager::getCurrentScreen() const {
-    return this->currentScreenPrivate;
-}
-
 void I3Pager::setCurrentScreen(QString screen) {
     this->currentScreenPrivate = screen;
     Q_EMIT currentScreenChanged();
+}
+
+QString I3Pager::getMode() {
+    return mode;
 }
