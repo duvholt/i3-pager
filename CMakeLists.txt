@@ -17,8 +17,8 @@ plasma_install_package(plasmoid org.kde.I3Pager)
 
 ADD_DEFINITIONS(-DQT_NO_KEYWORDS)
 
+option(BUILD_SHARED_LIBS off)
 add_subdirectory(i3ipc++)
-# add_library(i3ipc++ STATIC ${I3IPCpp_LIBRARIES})
 
 target_compile_options(i3ipc++ PRIVATE -fexceptions -fPIC)
 add_subdirectory(src)
