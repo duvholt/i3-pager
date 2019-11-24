@@ -73,6 +73,7 @@ QVariantList I3Pager::getWorkspaces() {
                 workspaceData.insert("name", name);
                 workspaceData.insert("icon", icon);
                 workspaceData.insert("visible", workspace->visible);
+                workspaceData.insert("urgent", workspace->urgent);
 
                 dataList.append(workspaceData);
             }

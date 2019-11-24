@@ -41,6 +41,31 @@ ColumnLayout {
                 width: textRow.width
                 height: root.height
 
+                Rectangle {
+                    function getColor() {
+                        if(mouseArea.containsMouse && modelData.visible) {
+                            return "#d19a66";
+                        } else if (modelData.visible) {
+                            return "#e5c07b";
+                        } else if (mouseArea.containsMouse) {
+                            return "#56b6c2";
+                        }
+                        return "transparent";
+                    }
+                    color: getColor()
+                    height: 3
+                    width: parent.width
+                    anchors.bottom: parent.bottom
+                    anchors.bottomMargin: 1
+                }
+
+                Rectangle {
+                    color: "#bd2c40"
+                    visible: modelData.urgent
+                    height: textRow.height
+                    width: textRow.width
+                }
+
                 RowLayout {
                     id: textRow
                     height: parent.height
@@ -81,23 +106,6 @@ ColumnLayout {
                         text: modelData.name
                         verticalAlignment: Text.AlignHCenter
                     }
-                }
-                Rectangle {
-                    function getColor() {
-                        if(mouseArea.containsMouse && modelData.visible) {
-                            return "#d19a66";
-                        } else if (modelData.visible) {
-                            return "#e5c07b";
-                        } else if (mouseArea.containsMouse) {
-                            return "#56b6c2";
-                        }
-                        return "transparent";
-                    }
-                    color: getColor()
-                    height: 3
-                    width: parent.width
-                    anchors.bottom: parent.bottom
-                    anchors.bottomMargin: 1
                 }
             }
         }
