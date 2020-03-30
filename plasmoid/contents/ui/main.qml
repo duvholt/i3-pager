@@ -69,8 +69,11 @@ ColumnLayout {
                 RowLayout {
                     id: textRow
                     height: parent.height
+                    
+                    Rectangle {
+                        width: 5
+                    }
                     Text {
-                        leftPadding: 10
                         font.family: "Noto Sans"
                         height: textRow.height
                         minimumPixelSize: 10
@@ -94,9 +97,9 @@ ColumnLayout {
                         color: "#dfdfdf"
                         text: modelData.icon
                         verticalAlignment: Text.AlignHCenter
+                        visible: plasmoid.configuration.showWorkspaceNames
                     }
                     Text {
-                        rightPadding: 10
                         height: textRow.height
                         minimumPixelSize: 10
                         font.pixelSize: 15
@@ -105,6 +108,10 @@ ColumnLayout {
                         color: "#dfdfdf"
                         text: modelData.name
                         verticalAlignment: Text.AlignHCenter
+                        visible: plasmoid.configuration.showWorkspaceNames
+                    }
+                    Rectangle {
+                        width: 5
                     }
                 }
             }

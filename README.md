@@ -42,6 +42,8 @@ Select an icon and click "Copy Unicode Glyph".
 
 If you can't see any icons make sure Font Awesome is installed as "Font Awesome 5 Free Solid". Try running `fc-match "Font Awesome 5 Free Solid"` and see if you get a match.
 
+You can choose to hide workspace names in the plasmoid settings.
+
 ## Multiple monitors
 
 If you use multiple monitors you need to add the plasmoid to each monitor as the plasmoid only shows workspaces for the monitor it is active on. This is a personal preference and I'm open to adding an option to show all workspaces regardless of monitor.
