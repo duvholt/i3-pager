@@ -74,12 +74,12 @@ ColumnLayout {
                         width: 5
                     }
                     Text {
-                        font.family: "Noto Sans"
+                        font.family: theme.defaultFont.family
                         height: textRow.height
                         minimumPixelSize: 10
                         font.pixelSize: 15
                         fontSizeMode: Text.VerticalFit
-                        color: "#dfdfdf"
+                        color: theme.textColor
                         text: modelData.index
                         verticalAlignment: Text.AlignHCenter
                     }
@@ -94,7 +94,7 @@ ColumnLayout {
                         fontSizeMode: Text.VerticalFit
                         font.family: "Font Awesome 5 Free Solid"
                         font.styleName: "Solid"
-                        color: "#dfdfdf"
+                        color: theme.textColor
                         text: modelData.icon
                         verticalAlignment: Text.AlignHCenter
                         visible: plasmoid.configuration.showWorkspaceNames
@@ -104,8 +104,8 @@ ColumnLayout {
                         minimumPixelSize: 10
                         font.pixelSize: 15
                         fontSizeMode: Text.VerticalFit
-                        font.family: "Noto Sans"
-                        color: "#dfdfdf"
+                        font.family: theme.defaultFont.family
+                        color: theme.textColor
                         text: modelData.name
                         verticalAlignment: Text.AlignHCenter
                         visible: plasmoid.configuration.showWorkspaceNames
@@ -133,7 +133,7 @@ ColumnLayout {
                 minimumPixelSize: 10
                 font.pixelSize: 15
                 fontSizeMode: Text.VerticalFit
-                font.family: "Noto Sans"
+                font.family: theme.defaultFont.family
                 color: "#333333"
                 text: i3pager.mode
             }
