@@ -76,8 +76,8 @@ ColumnLayout {
                     Text {
                         font.family: theme.defaultFont.family
                         height: textRow.height
-                        minimumPixelSize: 10
-                        font.pixelSize: 15
+                        minimumPixelSize: theme.smallestFont.pixelSize
+                        font.pixelSize: Math.min(textRow.height * 0.5, 1.5 * theme.defaultFont.pixelSize)
                         fontSizeMode: Text.VerticalFit
                         color: theme.textColor
                         text: modelData.index
@@ -89,8 +89,8 @@ ColumnLayout {
                         leftPadding: 3
                         bottomPadding: 0
                         height: textRow.height
-                        minimumPixelSize: 10
-                        font.pixelSize: 15
+                        minimumPixelSize: theme.smallestFont.pixelSize
+                        font.pixelSize: Math.min(textRow.height * 0.5, 1.5 * theme.defaultFont.pixelSize)
                         fontSizeMode: Text.VerticalFit
                         font.family: "Font Awesome 5 Free Solid"
                         font.styleName: "Solid"
@@ -101,8 +101,8 @@ ColumnLayout {
                     }
                     Text {
                         height: textRow.height
-                        minimumPixelSize: 10
-                        font.pixelSize: 15
+                        minimumPixelSize: theme.smallestFont.pixelSize
+                        font.pixelSize: Math.min(textRow.height * 0.5, 1.5 * theme.defaultFont.pixelSize)
                         fontSizeMode: Text.VerticalFit
                         font.family: theme.defaultFont.family
                         color: theme.textColor
@@ -130,8 +130,8 @@ ColumnLayout {
                 id: modeText
                 rightPadding: 10
                 leftPadding: 10
-                minimumPixelSize: 10
-                font.pixelSize: 15
+                minimumPixelSize: theme.smallestFont.pixelSize
+                font.pixelSize: Math.min(textRow.height * 0.5, 1.5 * theme.defaultFont.pixelSize)
                 fontSizeMode: Text.VerticalFit
                 font.family: theme.defaultFont.family
                 color: "#333333"
