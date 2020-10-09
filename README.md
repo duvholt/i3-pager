@@ -1,21 +1,24 @@
 # i3-pager
+
 Plasmoid pager for integrating i3 with KDE Plasma.
 
 ![image](https://user-images.githubusercontent.com/1637715/72685652-676b4e80-3aec-11ea-8173-4c20daaa584e.png)
 
-
 ## Installation
 
-Make sure extra-cmake-modules is installed.
++ Make sure extra-cmake-modules is installed.
 
-Build and install i3-pager:
++ Build and install i3-pager:
+
 ```bash
+git clone https://github.com/duvholt/i3-pager.git --recurse-submodules
+cd i3-pager
 cmake -DCMAKE_INSTALL_PREFIX=$(kf5-config --prefix)  -B build .
 make -C build
 sudo make -C build install
 ```
 
-Add i3-pager plasmoid to either Plasma dock or Latte-dock.
++ Add i3-pager plasmoid to either Plasma dock or Latte-dock.
 
 ## Workspace name and icon
 
@@ -35,8 +38,7 @@ bindsym $mod+3 workspace number $ws3
 bindsym $mod+4 workspace number $ws4
 ```
 
-Available icons are listed here:
-https://fontawesome.com/icons?d=gallery&s=solid&m=free
+Available icons are listed [here](https://fontawesome.com/icons?d=gallery&s=solid&m=free).
 
 Select an icon and click "Copy Unicode Glyph".
 
