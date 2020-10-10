@@ -2,7 +2,9 @@ set(plasmoidplugin_SRCS
         plugin.cpp
         plugin.h
         i3pager.cpp
-        i3pager.h)
+        i3pager.h
+        workspace.cpp
+        workspace.h)
 
 add_library(plasmoidplugin SHARED ${plasmoidplugin_SRCS})
 target_compile_options(plasmoidplugin PRIVATE -fexceptions)

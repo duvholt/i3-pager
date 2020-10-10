@@ -1,17 +1,9 @@
-#include <i3ipc++/ipc.hpp>
 #include "i3pager.h"
-#include <QScreen>
-#include <QGuiApplication>
-#include <QApplication>
-#include <QDesktopWidget>
-#include <QDebug>
-#include <future>
-#include <QVariant>
 
-#include <QtConcurrent/QtConcurrent>
+I3Pager::I3Pager(QObject* parent)
+    : QObject(parent) {
 
-
-I3Pager::I3Pager(QObject *parent) : QObject(parent) {
+    //qmlRegisterType<Workspace>();
     currentScreenPrivate = QString();
     mode = "default";
     QtConcurrent::run(QThreadPool::globalInstance(), [this]() {
@@ -28,7 +20,7 @@ void I3Pager::handleI3Events() {
         i3ipc::connection conn;
         conn.subscribe(i3ipc::ET_WORKSPACE | i3ipc::ET_BINDING | i3ipc::ET_MODE);
         // Handler of WORKSPACE EVENT
-        conn.signal_workspace_event.connect([this](const i3ipc::workspace_event_t&  ev) {
+        conn.signal_workspace_event.connect([this](const i3ipc::workspace_event_t& ev) {
             qInfo() << "workspace_event: " << (char)ev.type;
             if (ev.current) {
                 qInfo() << "\tSwitched to #" << ev.current->num << " - \"" << QString::fromStdString(ev.current->name) << '"';
@@ -51,37 +43,33 @@ void I3Pager::handleI3Events() {
     }
 }
 
-QVariantList I3Pager::getWorkspaces() {
-    QVariantList dataList;
+QList<Workspace> I3Pager::getWorkspaces() {
+    QList<Workspace> workspaceList;
     try {
         i3ipc::connection conn;
-        qInfo() << "Screen name " << this->currentScreenPrivate;
-        auto workspaces = conn.get_workspaces();
-        for (auto& workspace : workspaces) {
-            qInfo() << "name " << QString::fromStdString(workspace->name);
-            qInfo() << "out " << QString::fromStdString(workspace->output);
-            if(QString::fromStdString(workspace->output) == this->currentScreenPrivate) {
-                QMap<QString, QVariant> workspaceData;
-                auto wsName = QString::fromStdString(workspace->name);
-                auto splitName = wsName.split(':');
-                auto index = splitName[0];
-                auto name = splitName.size() == 1 ? splitName[0] : splitName[1];
-                auto icon = splitName.size() == 3 ? splitName[2] : "";
+        auto i3workspaceList = conn.get_workspaces();
 
-                workspaceData.insert("id", wsName);
-                workspaceData.insert("index", index);
-                workspaceData.insert("name", name);
-                workspaceData.insert("icon", icon);
-                workspaceData.insert("visible", workspace->visible);
-                workspaceData.insert("urgent", workspace->urgent);
+        for (auto& i3workspace : i3workspaceList) {
+            Workspace workspace;
 
-                dataList.append(workspaceData);
-            }
+            auto splitName = QString::fromStdString(i3workspace->name).split(':');
+            workspace.id = QString::fromStdString(i3workspace->name);
+            workspace.index = splitName[0];
+            workspace.name = splitName.size() == 1 ? splitName[0] : splitName[1];
+            workspace.icon = splitName.size() == 3 ? splitName[2] : "";
+            workspace.visible = i3workspace->visible;
+            workspace.urgent = i3workspace->urgent;
+            workspace.output = QString::fromStdString(i3workspace->output);
+
+            workspaceList.append(workspace);
         }
     } catch (...) {
-        // TODO
+        qWarning() << "i3ipc error";
     }
-    return dataList;
+
+    workspaceList = Workspace::filterByCurrentScreen(workspaceList, this->currentScreenPrivate);
+
+    return workspaceList;
 }
 
 void I3Pager::activateWorkspace(QString workspace) {

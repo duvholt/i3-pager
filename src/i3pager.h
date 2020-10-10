@@ -1,26 +1,36 @@
 #ifndef I3PAGER_PLASMOID_H
 #define I3PAGER_PLASMOID_H
 
-
-
-#include <QtCore/QObject>
+#include "workspace.h"
+#include <QApplication>
+#include <QDebug>
+#include <QDesktopWidget>
+#include <QGuiApplication>
+#include <QMetaType>
+#include <QScreen>
 #include <QVariant>
+#include <QtConcurrent/QtConcurrent>
+#include <QtCore/QObject>
+#include <future>
+#include <i3ipc++/ipc.hpp>
+
+Q_DECLARE_METATYPE(Workspace)
 
 class I3Pager : public QObject {
     Q_OBJECT
     Q_PROPERTY(QString currentScreen WRITE setCurrentScreen)
-    Q_PROPERTY(QVariantList workspaces READ getWorkspaces NOTIFY currentScreenChanged)
+    Q_PROPERTY(QList<Workspace> workspaces READ getWorkspaces NOTIFY currentScreenChanged)
     Q_PROPERTY(QString mode READ getMode NOTIFY modeChanged)
 
 public:
-    explicit I3Pager(QObject *parent = 0);
+    explicit I3Pager(QObject* parent = 0);
 
     QString getCurrentScreen() const;
     void setCurrentScreen(QString screen);
     Q_INVOKABLE void activateWorkspace(QString workspace);
 
 public Q_SLOTS:
-    QVariantList getWorkspaces();
+    QList<Workspace> getWorkspaces();
     QString getMode();
 
 Q_SIGNALS:
@@ -33,5 +43,4 @@ private:
     void handleI3Events();
 };
 
-
-#endif //I3PAGER_PLASMOID_H
+#endif I3PAGER_PLASMOID_H
