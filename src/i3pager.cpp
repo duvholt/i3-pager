@@ -3,7 +3,6 @@
 I3Pager::I3Pager(QObject* parent)
     : QObject(parent) {
 
-    //qmlRegisterType<Workspace>();
     currentScreenPrivate = QString();
     mode = "default";
     QtConcurrent::run(QThreadPool::globalInstance(), [this]() {
