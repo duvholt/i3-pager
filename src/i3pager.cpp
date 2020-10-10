@@ -48,6 +48,7 @@ QList<Workspace> I3Pager::getWorkspaces() {
     try {
         i3ipc::connection conn;
         auto i3workspaceList = conn.get_workspaces();
+        qInfo() << "Loading workspaces:";
 
         for (auto& i3workspace : i3workspaceList) {
             Workspace workspace;
@@ -61,14 +62,13 @@ QList<Workspace> I3Pager::getWorkspaces() {
             workspace.urgent = i3workspace->urgent;
             workspace.output = QString::fromStdString(i3workspace->output);
 
+            qInfo() << "Workspace:" << workspace.name << "urgent:" << workspace.urgent << "visible:" << workspace.visible << "output:" << workspace.output;
             workspaceList.append(workspace);
         }
     } catch (...) {
         qWarning() << "i3ipc error";
     }
-
     workspaceList = Workspace::filterByCurrentScreen(workspaceList, this->currentScreenPrivate);
-
     return workspaceList;
 }
 

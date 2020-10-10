@@ -1,6 +1,7 @@
 #ifndef WORKSPACE_H
 #define WORKSPACE_H
 
+#include <QDebug>
 #include <QtCore/QObject>
 
 class Workspace {
