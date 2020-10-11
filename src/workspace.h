@@ -28,4 +28,4 @@ public:
 
 Q_DECLARE_METATYPE(Workspace)
 
-#endif WORKSPACE_H
+#endif //WORKSPACE_H

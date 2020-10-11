@@ -95,3 +95,7 @@ void I3Pager::setCurrentScreen(QString screen) {
 QString I3Pager::getMode() {
     return mode;
 }
+
+QString I3Pager::getCurrentScreen() {
+	return this->currentScreenPrivate;
+}
