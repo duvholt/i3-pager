@@ -57,11 +57,22 @@ QList<Workspace> I3Pager::getWorkspaces() {
             workspace.index = splitName[0];
             workspace.name = splitName.size() == 1 ? splitName[0] : splitName[1];
             workspace.icon = splitName.size() == 3 ? splitName[2] : "";
+
+            workspace.output = QString::fromStdString(i3workspace->output);
+            workspace.focused = i3workspace->focused;
             workspace.visible = i3workspace->visible;
             workspace.urgent = i3workspace->urgent;
-            workspace.output = QString::fromStdString(i3workspace->output);
 
-            qInfo() << "Workspace:" << workspace.name << "urgent:" << workspace.urgent << "visible:" << workspace.visible << "output:" << workspace.output;
+            qInfo() << "i3Workspace name:" << QString::fromStdString(i3workspace->name);
+            qInfo() << "Workspace:"
+                    << "id:" << workspace.id
+                    << "index:" << workspace.index
+                    << "name:" << workspace.name
+                    << "icon:" << workspace.icon
+                    << "focused:" << workspace.focused
+                    << "urgent:" << workspace.urgent
+                    << "visible:" << workspace.visible
+                    << "output:" << workspace.output;
             workspaceList.append(workspace);
         }
     } catch (...) {

@@ -11,6 +11,7 @@ class Workspace {
     Q_PROPERTY(QString name MEMBER name)
     Q_PROPERTY(QString icon MEMBER icon)
     Q_PROPERTY(QString output MEMBER output)
+    Q_PROPERTY(bool focused MEMBER focused)
     Q_PROPERTY(bool visible MEMBER visible)
     Q_PROPERTY(bool urgent MEMBER urgent)
 public:
@@ -20,6 +21,7 @@ public:
     QString name;
     QString icon;
     QString output;
+    bool focused;
     bool visible;
     bool urgent;
 };
