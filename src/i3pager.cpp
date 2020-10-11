@@ -2,7 +2,6 @@
 
 I3Pager::I3Pager(QObject* parent)
     : QObject(parent) {
-
     currentScreenPrivate = QString();
     mode = "default";
     QtConcurrent::run(QThreadPool::globalInstance(), [this]() {
@@ -97,5 +96,5 @@ QString I3Pager::getMode() {
 }
 
 QString I3Pager::getCurrentScreen() {
-	return this->currentScreenPrivate;
+    return this->currentScreenPrivate;
 }
