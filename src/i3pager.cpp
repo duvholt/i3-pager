@@ -23,7 +23,7 @@ void I3Pager::handleI3Events() {
             qInfo() << "workspace_event: " << (char)ev.type;
             if (ev.current) {
                 qInfo() << "\tSwitched to #" << ev.current->num << " - \"" << QString::fromStdString(ev.current->name) << '"';
-                Q_EMIT currentScreenChanged();
+                Q_EMIT workspacesChanged();
             }
         });
 
@@ -89,7 +89,7 @@ void I3Pager::activateWorkspace(QString workspace) {
 
 void I3Pager::setCurrentScreen(QString screen) {
     this->currentScreenPrivate = screen;
-    Q_EMIT currentScreenChanged();
+    Q_EMIT workspacesChanged();
 }
 
 QString I3Pager::getMode() {

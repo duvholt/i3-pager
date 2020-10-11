@@ -17,7 +17,7 @@
 class I3Pager : public QObject {
     Q_OBJECT
     Q_PROPERTY(QString currentScreen WRITE setCurrentScreen)
-    Q_PROPERTY(QList<Workspace> workspaces READ getWorkspaces NOTIFY currentScreenChanged)
+    Q_PROPERTY(QList<Workspace> workspaces READ getWorkspaces NOTIFY workspacesChanged)
     Q_PROPERTY(QString mode READ getMode NOTIFY modeChanged)
 
 public:
@@ -32,7 +32,7 @@ public Q_SLOTS:
     QString getMode();
 
 Q_SIGNALS:
-    void currentScreenChanged();
+    void workspacesChanged();
     void modeChanged();
 
 private:
