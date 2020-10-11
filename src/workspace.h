@@ -24,4 +24,6 @@ public:
     bool urgent;
 };
 
+Q_DECLARE_METATYPE(Workspace)
+
 #endif WORKSPACE_H

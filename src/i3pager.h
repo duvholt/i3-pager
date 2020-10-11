@@ -14,8 +14,6 @@
 #include <future>
 #include <i3ipc++/ipc.hpp>
 
-Q_DECLARE_METATYPE(Workspace)
-
 class I3Pager : public QObject {
     Q_OBJECT
     Q_PROPERTY(QString currentScreen WRITE setCurrentScreen)
