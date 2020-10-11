@@ -17,7 +17,7 @@ ColumnLayout {
         id: i3pager
         currentScreen: Screen.name
         onWorkspacesChanged: {
-            repeater.model = i3pager.getWorkspaces();
+            repeater.model = i3pager.getWorkspaces(true);
         }
     }
 

@@ -27,8 +27,8 @@ public:
     Q_INVOKABLE void activateWorkspace(QString workspace);
 
 public Q_SLOTS:
-	QString getCurrentScreen();
-    QList<Workspace> getWorkspaces();
+    QString getCurrentScreen();
+    QList<Workspace> getWorkspaces(bool filterByCurrentScreen);
     QString getMode();
 
 Q_SIGNALS:

@@ -41,7 +41,7 @@ void I3Pager::handleI3Events() {
     }
 }
 
-QList<Workspace> I3Pager::getWorkspaces() {
+QList<Workspace> I3Pager::getWorkspaces(bool filterByCurrentScreen) {
     QList<Workspace> workspaceList;
     try {
         i3ipc::connection conn;
@@ -77,7 +77,10 @@ QList<Workspace> I3Pager::getWorkspaces() {
     } catch (...) {
         qWarning() << "i3ipc error";
     }
-    workspaceList = Workspace::filterByCurrentScreen(workspaceList, this->currentScreenPrivate);
+
+    if (filterByCurrentScreen) {
+        workspaceList = Workspace::filterByCurrentScreen(workspaceList, this->currentScreenPrivate);
+    }
     return workspaceList;
 }
 
