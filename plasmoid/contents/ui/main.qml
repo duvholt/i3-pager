@@ -16,6 +16,9 @@ ColumnLayout {
     I3Pager {
         id: i3pager
         currentScreen: Screen.name
+        onWorkspacesChanged: {
+            repeater.model = i3pager.getWorkspaces(true);
+        }
     }
 
     // Hack to update current screen
@@ -30,7 +33,6 @@ ColumnLayout {
 
         Repeater {
             id: repeater
-            model: i3pager.workspaces
 
             MouseArea {
                 id: mouseArea
