@@ -8,6 +8,12 @@ import QtQuick.Window 2.13
 import I3Pager 1.0
 
 ColumnLayout {
+    readonly property color defaultWorkspace: "transparent"
+    readonly property color focusedWorkspace: "#00ffff"
+    readonly property color visibleWorkspace: "#e5c07b"
+    readonly property color urgentWorkspace:  "#bd2c40"
+    readonly property color mouseWorkspace:   "#56b6c2"
+
     id: root
     Plasmoid.preferredRepresentation: Plasmoid.fullRepresentation
     Layout.fillHeight: true
@@ -45,25 +51,21 @@ ColumnLayout {
 
                 Rectangle {
                     function getColor() {
-                        if(mouseArea.containsMouse && modelData.visible) {
-                            return "#d19a66";
-                        } else if (modelData.visible) {
-                            return "#e5c07b";
-                        } else if (mouseArea.containsMouse) {
-                            return "#56b6c2";
-                        }
-                        return "transparent";
+                        if(mouseArea.containsMouse) {
+                            return mouseWorkspace;
+                        } 
+                        else if (modelData.urgent) {
+                            return urgentWorkspace;
+                        } 
+                        else if (modelData.focused) {
+                            return focusedWorkspace;
+                        } 
+                        else if (modelData.visible) {
+                            return visibleWorkspace;
+                        } 
+                        return defaultWorkspace;
                     }
                     color: getColor()
-                    height: 3
-                    width: parent.width
-                    anchors.bottom: parent.bottom
-                    anchors.bottomMargin: 1
-                }
-
-                Rectangle {
-                    color: "#bd2c40"
-                    visible: modelData.urgent
                     height: textRow.height
                     width: textRow.width
                 }
