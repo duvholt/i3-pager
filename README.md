@@ -1,12 +1,12 @@
 # i3-pager
 
-Plasmoid pager for integrating i3 with KDE Plasma.
+A plasmoid for integrating i3 with KDE Plasma.
 
 ![image](https://user-images.githubusercontent.com/1637715/72685652-676b4e80-3aec-11ea-8173-4c20daaa584e.png)
 
 ## Installation
 
-+ Make sure extra-cmake-modules is installed.
++ Make sure `extra-cmake-modules` is installed.
 
 + Build and install i3-pager:
 
@@ -20,9 +20,22 @@ sudo make -C build install
 
 + Add i3-pager plasmoid to either Plasma dock or Latte-dock.
 
-## Workspace name and icon
+## Features
 
-i3-pager supports setting name and icon per workspace using Font Awesome.
++ Shows current mode
++ Shows workspaces
+  + Allows filtering by the current screen
+  + Show workspace icons using `Font Awesome`
+
+## Configuration
+
+### Multiple screens
+
+If you have multiple screens you need to either put i3-pager on both or you need to disable `Filter workspaces by current screen` in the plasmoid setting. Otherwise you are only going to see the workspaces on the current screen.
+
+### Workspace name and icon
+
+i3-pager supports setting name and icon per workspace using `Font Awesome`.
 
 ```bash
 # <ws number>:<ws name>:<Font Awesome unicode glyph>
@@ -40,12 +53,8 @@ bindsym $mod+4 workspace number $ws4
 
 Available icons are listed [here](https://fontawesome.com/icons?d=gallery&s=solid&m=free).
 
-Select an icon and click "Copy Unicode Glyph".
+Select an icon and click `Copy Unicode Glyph`.
 
-If you can't see any icons make sure Font Awesome is installed as "Font Awesome 5 Free Solid". Try running `fc-match "Font Awesome 5 Free Solid"` and see if you get a match.
+If you can't see any icons make sure `Font Awesome` is installed as `Font Awesome 5 Free Solid`. Try running `fc-match "Font Awesome 5 Free Solid"` and see if you get a match.
 
 You can choose to hide workspace names in the plasmoid settings.
-
-## Multiple monitors
-
-If you use multiple monitors you need to add the plasmoid to each monitor as the plasmoid only shows workspaces for the monitor it is active on. This is a personal preference and I'm open to adding an option to show all workspaces regardless of monitor.

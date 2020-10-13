@@ -8,6 +8,12 @@ import QtQuick.Window 2.13
 import I3Pager 1.0
 
 ColumnLayout {
+    readonly property color defaultWorkspace: "transparent"
+    readonly property color focusedWorkspace: theme.positiveTextColor
+    readonly property color visibleWorkspace: theme.neutralTextColor
+    readonly property color urgentWorkspace:  theme.negativeTextColor
+    readonly property color mouseWorkspace:   theme.linkColor
+
     id: root
     Plasmoid.preferredRepresentation: Plasmoid.fullRepresentation
     Layout.fillHeight: true
@@ -17,7 +23,7 @@ ColumnLayout {
         id: i3pager
         currentScreen: Screen.name
         onWorkspacesChanged: {
-            repeater.model = i3pager.getWorkspaces(true);
+            repeater.model = i3pager.getWorkspaces(plasmoid.configuration.filterByCurrentScreen);
         }
     }
 
@@ -45,14 +51,19 @@ ColumnLayout {
 
                 Rectangle {
                     function getColor() {
-                        if(mouseArea.containsMouse && modelData.visible) {
-                            return "#d19a66";
-                        } else if (modelData.visible) {
-                            return "#e5c07b";
-                        } else if (mouseArea.containsMouse) {
-                            return "#56b6c2";
-                        }
-                        return "transparent";
+                        if(mouseArea.containsMouse) {
+                            return mouseWorkspace;
+                        } 
+                        else if (modelData.urgent && !plasmoid.configuration.urgentColorWholeWorkspace) {
+                            return urgentWorkspace;
+                        } 
+                        else if (modelData.focused) {
+                            return focusedWorkspace;
+                        } 
+                        else if (modelData.visible) {
+                            return visibleWorkspace;
+                        } 
+                        return defaultWorkspace;
                     }
                     color: getColor()
                     height: 3
@@ -62,8 +73,8 @@ ColumnLayout {
                 }
 
                 Rectangle {
-                    color: "#bd2c40"
-                    visible: modelData.urgent
+                    color: urgentWorkspace
+                    visible: modelData.urgent && plasmoid.configuration.urgentColorWholeWorkspace
                     height: textRow.height
                     width: textRow.width
                 }

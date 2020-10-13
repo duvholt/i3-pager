@@ -3,17 +3,33 @@ import QtQuick.Controls 2.5
 import QtQuick.Layouts 1.12
 import org.kde.kirigami 2.4 as Kirigami
 
-Item {
+Kirigami.FormLayout {
     id: page
     width: childrenRect.width
     height: childrenRect.height
 
     property alias cfg_showWorkspaceNames: showWorkspaceNames.checked
+    property alias cfg_filterByCurrentScreen: filterByCurrentScreen.checked
+    property alias cfg_urgentColorWholeWorkspace: urgentColorWholeWorkspace.checked
 
     CheckBox {
         id: showWorkspaceNames
         text: i18n("Show workspace names")
         checked: plasmoid.configuration.showWorkspaceNames
         onCheckedChanged: plasmoid.configuration.showWorkspaceNames = checked
+    }
+
+    CheckBox {
+        id: filterByCurrentScreen
+        text: i18n("Filter workspaces by current screen")
+        checked: plasmoid.configuration.filterByCurrentScreen
+        onCheckedChanged: plasmoid.configuration.filterByCurrentScreen = checked
+    }
+
+    CheckBox {
+        id: urgentColorWholeWorkspace
+        text: i18n("Color the whole workspace if urgent")
+        checked: plasmoid.configuration.urgentColorWholeWorkspace
+        onCheckedChanged: plasmoid.configuration.urgentColorWholeWorkspace = checked
     }
 }
