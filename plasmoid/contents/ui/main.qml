@@ -23,7 +23,7 @@ ColumnLayout {
         id: i3pager
         currentScreen: Screen.name
         onWorkspacesChanged: {
-            repeater.model = i3pager.getWorkspaces(true);
+            repeater.model = i3pager.getWorkspaces(plasmoid.configuration.filterByCurrentScreen);
         }
     }
 
