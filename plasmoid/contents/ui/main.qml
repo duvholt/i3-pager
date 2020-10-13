@@ -66,6 +66,12 @@ ColumnLayout {
                         return defaultWorkspace;
                     }
                     color: getColor()
+                    height: 3
+                    width: parent.width
+                    anchors.bottom: parent.bottom
+                    anchors.bottomMargin: 1
+                }
+
                     height: textRow.height
                     width: textRow.width
                 }
