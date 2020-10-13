@@ -10,6 +10,7 @@ Kirigami.FormLayout {
 
     property alias cfg_showWorkspaceNames: showWorkspaceNames.checked
     property alias cfg_filterByCurrentScreen: filterByCurrentScreen.checked
+    property alias cfg_urgentColorWholeWorkspace: urgentColorWholeWorkspace.checked
 
     CheckBox {
         id: showWorkspaceNames
@@ -23,5 +24,12 @@ Kirigami.FormLayout {
         text: i18n("Filter workspaces by current screen")
         checked: plasmoid.configuration.filterByCurrentScreen
         onCheckedChanged: plasmoid.configuration.filterByCurrentScreen = checked
+    }
+
+    CheckBox {
+        id: urgentColorWholeWorkspace
+        text: i18n("Color the whole workspace if urgent")
+        checked: plasmoid.configuration.urgentColorWholeWorkspace
+        onCheckedChanged: plasmoid.configuration.urgentColorWholeWorkspace = checked
     }
 }

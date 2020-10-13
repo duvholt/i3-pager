@@ -12,5 +12,10 @@
 				true
 			</default>
 		</entry>
+		<entry name="urgentColorWholeWorkspace" type="Bool">
+			<default>
+				true
+			</default>
+		</entry>
 	</group>
 </kcfg>

@@ -11,7 +11,7 @@ ColumnLayout {
     readonly property color defaultWorkspace: "transparent"
     readonly property color focusedWorkspace: theme.positiveTextColor
     readonly property color visibleWorkspace: theme.neutralTextColor
-    readonly property color urgentWorkspace:  theme.viewNegativeTextColor
+    readonly property color urgentWorkspace:  theme.negativeTextColor
     readonly property color mouseWorkspace:   theme.linkColor
 
     id: root
@@ -54,7 +54,7 @@ ColumnLayout {
                         if(mouseArea.containsMouse) {
                             return mouseWorkspace;
                         } 
-                        else if (modelData.urgent) {
+                        else if (modelData.urgent && !plasmoid.configuration.urgentColorWholeWorkspace) {
                             return urgentWorkspace;
                         } 
                         else if (modelData.focused) {
@@ -72,6 +72,9 @@ ColumnLayout {
                     anchors.bottomMargin: 1
                 }
 
+                Rectangle {
+                    color: urgentWorkspace
+                    visible: modelData.urgent && plasmoid.configuration.urgentColorWholeWorkspace
                     height: textRow.height
                     width: textRow.width
                 }
