@@ -9,10 +9,10 @@ import I3Pager 1.0
 
 ColumnLayout {
     readonly property color defaultWorkspace: "transparent"
-    readonly property color focusedWorkspace: "#00ffff"
-    readonly property color visibleWorkspace: "#e5c07b"
-    readonly property color urgentWorkspace:  "#bd2c40"
-    readonly property color mouseWorkspace:   "#56b6c2"
+    readonly property color focusedWorkspace: theme.positiveTextColor
+    readonly property color visibleWorkspace: theme.neutralTextColor
+    readonly property color urgentWorkspace:  theme.viewNegativeTextColor
+    readonly property color mouseWorkspace:   theme.linkColor
 
     id: root
     Plasmoid.preferredRepresentation: Plasmoid.fullRepresentation
