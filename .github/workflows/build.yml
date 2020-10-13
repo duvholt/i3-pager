@@ -1,0 +1,27 @@
+name: Build plasmoid plugin
+
+on: [push]
+
+jobs:
+  build:
+    name: Linux Latest x64
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: recursive
+
+    - name: Installing system libs
+      run: |
+        sudo apt update
+        sudo apt install libkf5plasma-dev extra-cmake-modules qtbase5-dev qtdeclarative5-dev libsigc++-2.0-dev libjsoncpp-dev i3-wm
+
+    - name: Configure
+      run: cmake -DCMAKE_INSTALL_PREFIX=$(kf5-config --prefix)  -B build .
+
+    - name: Build
+      run: make -j $(nproc) -C build
+
+    - name: Install
+      run: sudo make -C build install
