@@ -18,7 +18,7 @@ jobs:
         sudo apt install libkf5plasma-dev extra-cmake-modules qtbase5-dev qtdeclarative5-dev libsigc++-2.0-dev libjsoncpp-dev i3-wm
 
     - name: Configure
-      run: cmake -DCMAKE_INSTALL_PREFIX=$(kf5-config --prefix)  -B build .
+      run: cmake -DCMAKE_INSTALL_PREFIX=$(kf5-config --prefix) -DCI_ERRORS=on -B build .
 
     - name: Build
       run: make -j $(nproc) -C build

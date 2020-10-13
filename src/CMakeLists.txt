@@ -9,6 +9,10 @@ set(plasmoidplugin_SRCS
 add_library(plasmoidplugin SHARED ${plasmoidplugin_SRCS})
 target_compile_options(plasmoidplugin PRIVATE -fexceptions)
 
+if (CI_ERRORS)
+        target_compile_options(plasmoidplugin PRIVATE -Werror -Wall -Wextra -pedantic-errors)
+endif()
+
 include_directories(${I3IPCpp_INCLUDE_DIRS})
 link_directories(${I3IPCpp_LIBRARY_DIRS})
 target_link_libraries(plasmoidplugin Qt5::Quick Qt5::Widgets KF5::Plasma KF5::WindowSystem ${I3IPCpp_LIBRARIES})
