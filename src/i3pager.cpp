@@ -41,6 +41,23 @@ void I3Pager::handleI3Events() {
     }
 }
 
+QList<QString> I3Pager::getScreenNames() {
+    QList<QString> screenList;
+    try {
+        i3ipc::connection conn;
+        auto screens = conn.get_outputs();
+
+        for (auto& screen : screens) {
+            screenList.append(QString::fromStdString(screen->name));
+            qInfo() << "Screen name:" << QString::fromStdString(screen->name);
+        }
+    } catch (...) {
+        qWarning() << "i3ipc error";
+    }
+
+    return screenList;
+}
+
 QList<Workspace> I3Pager::getWorkspaces(bool filterByCurrentScreen) {
     QList<Workspace> workspaceList;
     try {

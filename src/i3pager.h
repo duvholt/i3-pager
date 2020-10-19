@@ -29,6 +29,7 @@ public:
 public Q_SLOTS:
     QString getCurrentScreen();
     QList<Workspace> getWorkspaces(bool filterByCurrentScreen);
+    QList<QString> getScreenNames();
     QString getMode();
 
 Q_SIGNALS:
