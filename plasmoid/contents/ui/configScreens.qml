@@ -73,7 +73,6 @@ ColumnLayout {
             }
 
             delegate : Kirigami.AbstractListItem {
-                id : listViewDelegate
                 highlighted : false
                 hoverEnabled : false
 
