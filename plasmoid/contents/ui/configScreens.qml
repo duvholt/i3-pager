@@ -83,23 +83,29 @@ ColumnLayout {
                         text : name
                     }
 
-                    Button {
-                        enabled : index != 0
-                        icon.name : "up"
-                        onClicked : {
-                            screenListModel.move(index, index - 1, 1);
-                            ScreensJS.saveConfig();
-                        }
-                    }
-                    Button {
-                        enabled : index != (screenListModel.count - 1)
-                        icon.name : "down"
-                        onClicked : {
-                            screenListModel.move(index, index + 1, 1);
-                            ScreensJS.saveConfig();
-                        }
-                    }
 
+                    RowLayout {
+                        property var contentWidth: Math.max(implicitBackgroundWidth + leftInset + rightInset, implicitContentWidth + leftPadding + rightPadding)
+                        implicitWidth : Math.max(contentWidth, screensListView.visibilityColumnWidth)
+                        Component.onCompleted : screensListView.visibilityColumnWidth = Math.max(implicitWidth, screensListView.visibilityColumnWidth)
+
+                        Button {
+                            enabled : index != 0
+                            icon.name : "up"
+                            onClicked : {
+                                screenListModel.move(index, index - 1, 1);
+                                ScreensJS.saveConfig();
+                            }
+                        }
+                        Button {
+                            enabled : index != (screenListModel.count - 1)
+                            icon.name : "down"
+                            onClicked : {
+                                screenListModel.move(index, index + 1, 1);
+                                ScreensJS.saveConfig();
+                            }
+                        }
+                    }
                 }
             }
         }
