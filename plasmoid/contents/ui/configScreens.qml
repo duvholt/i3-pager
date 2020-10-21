@@ -92,6 +92,7 @@ ColumnLayout {
                     }
 
                     Button {
+                        enabled : index != 0
                         icon.name : "up"
                         onClicked : {
                             screenListModel.move(index, index - 1, 1);
@@ -99,6 +100,7 @@ ColumnLayout {
                         }
                     }
                     Button {
+                        enabled : index != (screenListModel.count - 1)
                         icon.name : "down"
                         onClicked : {
                             screenListModel.move(index, index + 1, 1);
