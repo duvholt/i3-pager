@@ -70,14 +70,6 @@ ColumnLayout {
                         Component.onCompleted : screensListView.visibilityColumnWidth = Math.max(implicitWidth, screensListView.visibilityColumnWidth)
                     }
                 }
-
-            }
-
-            section {
-                property : "category"
-                delegate : Kirigami.ListSectionHeader {
-                    label : categoryName(section)
-                }
             }
 
             delegate : Kirigami.AbstractListItem {
