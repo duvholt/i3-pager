@@ -23,7 +23,17 @@ ColumnLayout {
         id: i3pager
         currentScreen: Screen.name
         onWorkspacesChanged: {
+            updateWorkspaces();
+        }
+        function updateWorkspaces() {
             repeater.model = i3pager.getWorkspaces(plasmoid.configuration.filterByCurrentScreen);
+        }
+    }
+
+    Connections {
+        target: plasmoid.configuration
+        onFilterByCurrentScreenChanged: {
+            i3pager.updateWorkspaces();
         }
     }
 
