@@ -17,6 +17,8 @@
 				true
 			</default>
 		</entry>
+		<entry name="orderWorkspacesBy" type="String">
+		</entry>
 	</group>
 	<group name="Screens">
 		<entry name="screenNameList" type="StringList">
