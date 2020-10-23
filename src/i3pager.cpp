@@ -58,7 +58,7 @@ QList<QString> I3Pager::getScreenNames() {
     return screenList;
 }
 
-QList<Workspace> I3Pager::getWorkspaces(bool filterByCurrentScreen) {
+QList<Workspace> I3Pager::getWorkspaces(bool filterByCurrentScreen, QString orderWorkspacesBy, QList<QString> screenOrder) {
     QList<Workspace> workspaceList;
     try {
         i3ipc::connection conn;
@@ -97,6 +97,10 @@ QList<Workspace> I3Pager::getWorkspaces(bool filterByCurrentScreen) {
 
     if (filterByCurrentScreen) {
         workspaceList = Workspace::filterByCurrentScreen(workspaceList, this->currentScreenPrivate);
+    }
+
+    if (orderWorkspacesBy == "screen" && !screenOrder.isEmpty()) {
+        workspaceList = Workspace::orderByOutput(workspaceList, screenOrder);
     }
     return workspaceList;
 }
