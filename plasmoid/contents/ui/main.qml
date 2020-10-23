@@ -31,8 +31,14 @@ ColumnLayout {
     }
 
     Connections {
-        target: plasmoid.configuration
-        onFilterByCurrentScreenChanged: {
+        target : plasmoid.configuration
+        onFilterByCurrentScreenChanged : {
+            i3pager.updateWorkspaces();
+        }
+        onOrderWorkspacesByChanged : {
+            i3pager.updateWorkspaces();
+        }
+        onScreenNameListChanged : {
             i3pager.updateWorkspaces();
         }
     }
