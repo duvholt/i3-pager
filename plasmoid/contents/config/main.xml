@@ -18,6 +18,7 @@
 			</default>
 		</entry>
 		<entry name="orderWorkspacesBy" type="String">
+			"default"
 		</entry>
 	</group>
 	<group name="Screens">
