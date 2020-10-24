@@ -24,5 +24,7 @@
 	<group name="Screens">
 		<entry name="screenNameList" type="StringList">
 		</entry>
+		<entry name="screenColorList" type="StringList">
+		</entry>
 	</group>
 </kcfg>
