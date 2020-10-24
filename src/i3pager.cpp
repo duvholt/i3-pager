@@ -48,8 +48,10 @@ QList<QString> I3Pager::getScreenNames() {
         auto screens = conn.get_outputs();
 
         for (auto& screen : screens) {
-            screenList.append(QString::fromStdString(screen->name));
-            qInfo() << "Screen name:" << QString::fromStdString(screen->name);
+            if (screen->active) {
+                screenList.append(QString::fromStdString(screen->name));
+                qInfo() << "Screen name:" << QString::fromStdString(screen->name);
+            }
         }
     } catch (...) {
         qWarning() << "i3ipc error";
