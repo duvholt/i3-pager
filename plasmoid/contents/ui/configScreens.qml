@@ -12,6 +12,7 @@ ColumnLayout {
     id : page
 
     property var cfg_screenNameList
+    property var cfg_screenColorList
 
     I3Pager {
         id : i3pager
@@ -30,11 +31,13 @@ ColumnLayout {
 
         ScrollBar.horizontal.policy : ScrollBar.AlwaysOff
         property bool scrollBarVisible : ScrollBar.vertical && ScrollBar.vertical.visible
-        property var scrollBarWidth: scrollBarVisible ?ScrollBar.vertical.width : 0
+        property var scrollBarWidth: scrollBarVisible ? ScrollBar.vertical.width : 0
 
         ListView {
             id : screensListView
             clip : true
+
+            property var visibilityColumnWidth: Kirigami.Units.gridUnit
 
             Component.onCompleted : {
                 ScreensJS.loadConfig();
@@ -43,10 +46,8 @@ ColumnLayout {
 
             model : ListModel {
                 id : screenListModel
+                dynamicRoles : true
             }
-
-            property var visibilityColumnWidth: Kirigami.Units.gridUnit
-            property var keySequenceColumnWidth: Kirigami.Units.gridUnit
 
             header : Kirigami.AbstractListItem {
                 hoverEnabled : false
@@ -79,9 +80,41 @@ ColumnLayout {
                 contentItem : RowLayout {
                     Label {
                         Layout.fillWidth : true
-                        text : name
+                        text : screenName
                     }
 
+                    MouseArea {
+                        hoverEnabled : true
+                        cursorShape : Qt.PointingHandCursor
+                        Layout.fillHeight : true
+                        property var contentWidth: Math.max(implicitBackgroundWidth + leftInset + rightInset, implicitContentWidth + leftPadding + rightPadding)
+                        implicitWidth : Math.max(contentWidth, screensListView.visibilityColumnWidth)
+                        Component.onCompleted : screensListView.visibilityColumnWidth = Math.max(implicitWidth, screensListView.visibilityColumnWidth)
+
+                        onClicked : {
+                            colorDialog.open();
+                        }
+
+                        Rectangle {
+                            id : colorRectangle
+                            width : parent.width
+                            height : parent.height
+
+                            color : screenColor
+                        }
+
+                        ColorDialog {
+                            id : colorDialog
+                            title : "Please choose a screen color"
+                            onAccepted : {
+                                screenListModel.set(index, {
+                                    screenName: screenName,
+                                    screenColor: colorDialog.color
+                                });
+                                ScreensJS.saveConfig();
+                            }
+                        }
+                    }
 
                     RowLayout {
                         property var contentWidth: Math.max(implicitBackgroundWidth + leftInset + rightInset, implicitContentWidth + leftPadding + rightPadding)
