@@ -4,13 +4,17 @@ I3Pager::I3Pager(QObject* parent)
     : QObject(parent) {
     currentScreenPrivate = QString();
     mode = "default";
-    QtConcurrent::run(QThreadPool::globalInstance(), [this]() {
+    i3ipcFuture = QtConcurrent::run(QThreadPool::globalInstance(), [this]() {
         while (true) {
             handleI3Events();
             qWarning() << "Lost ipc connection";
             QThread::sleep(10);
         }
     });
+}
+
+I3Pager::~I3Pager() {
+    i3ipcFuture.cancel();
 }
 
 void I3Pager::handleI3Events() {

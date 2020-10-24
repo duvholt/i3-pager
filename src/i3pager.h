@@ -21,6 +21,7 @@ class I3Pager : public QObject {
 
 public:
     explicit I3Pager(QObject* parent = 0);
+    ~I3Pager();
 
     QString getCurrentScreen() const;
     void setCurrentScreen(QString screen);
@@ -38,6 +39,7 @@ Q_SIGNALS:
 private:
     QString currentScreenPrivate;
     QString mode;
+    QFuture<void> i3ipcFuture;
     void handleI3Events();
 };
 
