@@ -22,6 +22,7 @@ ColumnLayout {
     I3Pager {
         id : i3pager
         currentScreen : Screen.name
+        monitorForEvents : true
         onWorkspacesChanged : {
             updateWorkspaces();
         }

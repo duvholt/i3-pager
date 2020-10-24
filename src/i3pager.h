@@ -17,14 +17,18 @@
 class I3Pager : public QObject {
     Q_OBJECT
     Q_PROPERTY(QString currentScreen READ getCurrentScreen WRITE setCurrentScreen)
+    Q_PROPERTY(bool monitorForEvents WRITE setMonitorForEvents)
     Q_PROPERTY(QString mode READ getMode NOTIFY modeChanged)
 
 public:
     explicit I3Pager(QObject* parent = 0);
+    ~I3Pager();
 
     QString getCurrentScreen() const;
     void setCurrentScreen(QString screen);
-    Q_INVOKABLE void activateWorkspace(QString workspace);
+    void setMonitorForEvents(bool monitorForEvents);
+    Q_INVOKABLE void
+    activateWorkspace(QString workspace);
 
 public Q_SLOTS:
     QString getCurrentScreen();
@@ -39,6 +43,7 @@ Q_SIGNALS:
 private:
     QString currentScreenPrivate;
     QString mode;
+    QFuture<void> i3ipcFuture;
     void handleI3Events();
 };
 
