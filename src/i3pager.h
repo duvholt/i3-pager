@@ -2,6 +2,7 @@
 #define I3PAGER_PLASMOID_H
 
 #include "workspace.h"
+#include "i3listener.h"
 #include <QApplication>
 #include <QDebug>
 #include <QDesktopWidget>
@@ -21,6 +22,7 @@ class I3Pager : public QObject {
 
 public:
     explicit I3Pager(QObject* parent = 0);
+    ~I3Pager();
 
     QString getCurrentScreen() const;
     void setCurrentScreen(QString screen);
@@ -36,9 +38,9 @@ Q_SIGNALS:
     void modeChanged();
 
 private:
+    I3ListenerThread* i3ListenerThread;
     QString currentScreenPrivate;
     QString mode;
-    void handleI3Events();
 };
 
 #endif //I3PAGER_PLASMOID_H
