@@ -38,6 +38,7 @@ Q_SIGNALS:
     void modeChanged();
 
 private:
+    I3ListenerThread* i3ListenerThread;
     QString currentScreenPrivate;
     QString mode;
     void handleI3Events();

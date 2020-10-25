@@ -4,18 +4,26 @@ I3Pager::I3Pager(QObject* parent)
     : QObject(parent) {
     currentScreenPrivate = QString();
     mode = "default";
-    I3Listener *listener = new I3Listener(this);
-    connect(listener, &I3Listener::modeChanged, this, [=](const QString& mode) {
+
+    qDebug() << "Starting i3 listener";
+    this->i3ListenerThread = new I3ListenerThread(this);
+    connect(i3ListenerThread, &I3ListenerThread::modeChanged, this, [=](const QString& mode) {
         this->mode = mode;
         Q_EMIT modeChanged();
     });
-    connect(listener, &I3Listener::workspacesChanged, this, [=]() {
+    connect(i3ListenerThread, &I3ListenerThread::workspacesChanged, this, [=]() {
         Q_EMIT workspacesChanged();
     });
+    connect(i3ListenerThread, &I3ListenerThread::finished, i3ListenerThread, &QObject::deleteLater);
+    i3ListenerThread->start();
+    qDebug() << "i3 listener started";
 }
 
 I3Pager::~I3Pager() {
     qDebug() << "I3Pager destructor";
+    this->i3ListenerThread->stop();
+    this->i3ListenerThread->wait();
+    qDebug() << "I3Pager destructor done";
 }
 
 QList<Workspace> I3Pager::getWorkspaces(bool filterByCurrentScreen) {
