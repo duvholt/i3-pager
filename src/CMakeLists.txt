@@ -3,6 +3,8 @@ set(plasmoidplugin_SRCS
         plugin.h
         i3pager.cpp
         i3pager.h
+        i3listener.cpp
+        i3listener.h
         workspace.cpp
         workspace.h)
 
