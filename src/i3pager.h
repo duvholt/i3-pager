@@ -27,8 +27,7 @@ public:
     QString getCurrentScreen() const;
     void setCurrentScreen(QString screen);
     void setMonitorForEvents(bool monitorForEvents);
-    Q_INVOKABLE void
-    activateWorkspace(QString workspace);
+    Q_INVOKABLE void activateWorkspace(QString workspace);
 
 public Q_SLOTS:
     QString getCurrentScreen();
