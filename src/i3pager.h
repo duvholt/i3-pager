@@ -1,6 +1,7 @@
 #ifndef I3PAGER_PLASMOID_H
 #define I3PAGER_PLASMOID_H
 
+#include "i3listener.h"
 #include "workspace.h"
 #include <QApplication>
 #include <QDebug>
@@ -17,7 +18,6 @@
 class I3Pager : public QObject {
     Q_OBJECT
     Q_PROPERTY(QString currentScreen READ getCurrentScreen WRITE setCurrentScreen)
-    Q_PROPERTY(bool monitorForEvents WRITE setMonitorForEvents)
     Q_PROPERTY(QString mode READ getMode NOTIFY modeChanged)
 
 public:
@@ -26,7 +26,6 @@ public:
 
     QString getCurrentScreen() const;
     void setCurrentScreen(QString screen);
-    void setMonitorForEvents(bool monitorForEvents);
     Q_INVOKABLE void activateWorkspace(QString workspace);
 
 public Q_SLOTS:
@@ -40,10 +39,9 @@ Q_SIGNALS:
     void modeChanged();
 
 private:
+    I3ListenerThread* i3ListenerThread;
     QString currentScreenPrivate;
     QString mode;
-    QFuture<void> i3ipcFuture;
-    void handleI3Events();
 };
 
 #endif //I3PAGER_PLASMOID_H
