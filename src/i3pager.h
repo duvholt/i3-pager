@@ -41,7 +41,6 @@ private:
     I3ListenerThread* i3ListenerThread;
     QString currentScreenPrivate;
     QString mode;
-    void handleI3Events();
 };
 
 #endif //I3PAGER_PLASMOID_H
