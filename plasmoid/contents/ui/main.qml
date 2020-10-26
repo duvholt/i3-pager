@@ -72,7 +72,6 @@ ColumnLayout {
                 onClicked : {
                     i3pager.activateWorkspace(modelData.id)
                 }
-
                 width : textRow.width
                 height : root.height
 
@@ -85,7 +84,6 @@ ColumnLayout {
                     visible : plasmoid.configuration.colorWorkspaceByScreen
                     height : textRow.height
                     width : textRow.width
-
                 }
 
                 Rectangle {

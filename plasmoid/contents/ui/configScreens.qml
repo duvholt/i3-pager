@@ -90,7 +90,6 @@ ColumnLayout {
                         property var contentWidth: Math.max(implicitBackgroundWidth + leftInset + rightInset, implicitContentWidth + leftPadding + rightPadding)
                         implicitWidth : Math.max(contentWidth, screensListView.visibilityColumnWidth)
                         Component.onCompleted : screensListView.visibilityColumnWidth = Math.max(implicitWidth, screensListView.visibilityColumnWidth)
-
                         onClicked : {
                             colorDialog.color = screenColor;
                             colorDialog.open();
@@ -100,7 +99,6 @@ ColumnLayout {
                             id : colorRectangle
                             width : parent.width
                             height : parent.height
-
                             color : screenColor
                         }
 
