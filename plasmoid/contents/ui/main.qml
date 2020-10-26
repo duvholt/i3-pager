@@ -76,19 +76,15 @@ ColumnLayout {
                 height : root.height
 
                 Rectangle {
-                    function getColor() {
+                    function getFillColor() {
+                        if (modelData.urgent && plasmoid.configuration.urgentColorWholeWorkspace) {
+                            return urgentWorkspace;
+                        }
                         var indexOfScreen = plasmoid.configuration.screenNameList.indexOf(modelData.output);
                         var screenColor = plasmoid.configuration.screenColorList[indexOfScreen];
                         return screenColor;
                     }
-                    color : getColor()
-                    visible : plasmoid.configuration.colorWorkspaceByScreen
-                    height : textRow.height
-                    width : textRow.width
-                }
-
-                Rectangle {
-                    function getColor() {
+                    function getBorderColor() {
                         if (mouseArea.containsMouse) {
                             return mouseWorkspace;
                         } else if (modelData.urgent && !plasmoid.configuration.urgentColorWholeWorkspace) {
@@ -100,18 +96,15 @@ ColumnLayout {
                         }
                         return defaultWorkspace;
                     }
-                    color : getColor()
-                    height : 3
-                    width : parent.width
-                    anchors.bottom : parent.bottom
-                    anchors.bottomMargin : 1
-                }
-
-                Rectangle {
-                    color : urgentWorkspace
-                    visible : modelData.urgent && plasmoid.configuration.urgentColorWholeWorkspace
+                    color : getFillColor()
+                    visible : plasmoid.configuration.colorWorkspaceByScreen
+                    radius : 3
                     height : textRow.height
                     width : textRow.width
+                    border {
+                        width : 3
+                        color : getBorderColor()
+                    }
                 }
 
                 RowLayout {
