@@ -102,7 +102,7 @@ ColumnLayout {
                     height : textRow.height
                     width : textRow.width
                     border {
-                        width : 3
+                        width : 2
                         color : getBorderColor()
                     }
                 }
