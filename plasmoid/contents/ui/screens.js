@@ -16,7 +16,7 @@ function loadConfig() {
 function loadNewScreens() {
     for (var screenName of i3pager.getScreenNames()) {
         if (!isScreenNameOnList(screenName, cfg_screenNameList)) {
-            screenListModel.append({screenName: screenName, screenColor: "#000000"});
+            screenListModel.append({screenName: screenName, screenColor: "#40ff0000"});
         }
     }
 }
