@@ -106,6 +106,7 @@ ColumnLayout {
                         ColorDialog {
                             id : colorDialog
                             title : "Please choose a screen color"
+                            showAlphaChannel : true
                             onAccepted : {
                                 screenListModel.set(index, {
                                     screenName: screenName,
