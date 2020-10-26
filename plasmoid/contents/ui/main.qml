@@ -76,11 +76,12 @@ ColumnLayout {
                 height : root.height
 
                 Rectangle {
-                    color : {
+                    function getColor() {
                         var indexOfScreen = plasmoid.configuration.screenNameList.indexOf(modelData.output);
                         var screenColor = plasmoid.configuration.screenColorList[indexOfScreen];
                         return screenColor;
                     }
+                    color : getColor()
                     visible : plasmoid.configuration.colorWorkspaceByScreen
                     height : textRow.height
                     width : textRow.width
