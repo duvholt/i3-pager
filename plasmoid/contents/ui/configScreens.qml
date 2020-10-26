@@ -92,6 +92,7 @@ ColumnLayout {
                         Component.onCompleted : screensListView.visibilityColumnWidth = Math.max(implicitWidth, screensListView.visibilityColumnWidth)
 
                         onClicked : {
+                            colorDialog.color = screenColor;
                             colorDialog.open();
                         }
 
