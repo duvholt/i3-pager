@@ -14,6 +14,11 @@ ColumnLayout {
     readonly property color urgentWorkspace : theme.negativeTextColor
     readonly property color mouseWorkspace : theme.linkColor
 
+    function colorWithAlpha(color, alpha) {
+        console.log(color.r);
+        return Qt.rgba(color.r, color.g, color.b, alpha);
+    }
+
     id : root
     Plasmoid.preferredRepresentation : Plasmoid.fullRepresentation
     Layout.fillHeight : true
@@ -70,6 +75,18 @@ ColumnLayout {
 
                 width : textRow.width
                 height : root.height
+
+                Rectangle {
+                    color : {
+                        var indexOfScreen = plasmoid.configuration.screenNameList.indexOf(modelData.output);
+                        var screenColor = plasmoid.configuration.screenColorList[indexOfScreen];
+                        return screenColor;
+                    }
+                    visible : plasmoid.configuration.colorWorkspaceByScreen
+                    height : textRow.height
+                    width : textRow.width
+
+                }
 
                 Rectangle {
                     function getColor() {
