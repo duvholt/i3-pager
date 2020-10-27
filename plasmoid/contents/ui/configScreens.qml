@@ -68,6 +68,7 @@ ColumnLayout {
             Component.onCompleted : {
                 ScreensJS.loadConfig();
                 ScreensJS.loadNewScreens();
+                ScreensJS.saveConfig();
             }
 
             model : ListModel {
