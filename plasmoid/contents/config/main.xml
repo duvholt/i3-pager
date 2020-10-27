@@ -23,13 +23,20 @@
 			</default>
 		</entry>
 		<entry name="orderWorkspacesBy" type="String">
-			"default"
+			<default>
+				"default"
+			</default>
 		</entry>
 	</group>
 	<group name="Screens">
 		<entry name="screenNameList" type="StringList">
 		</entry>
 		<entry name="screenColorList" type="StringList">
+		</entry>
+		<entry name="screenColorOpacity" type="Int">
+			<default>
+				50
+			</default>
 		</entry>
 	</group>
 </kcfg>
