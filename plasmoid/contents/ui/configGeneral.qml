@@ -11,7 +11,6 @@ Kirigami.FormLayout {
     property alias cfg_showWorkspaceNames : showWorkspaceNames.checked
     property alias cfg_filterByCurrentScreen : filterByCurrentScreen.checked
     property alias cfg_urgentColorWholeWorkspace : urgentColorWholeWorkspace.checked
-    property alias cfg_colorWorkspaceByScreen : colorWorkspaceByScreen.checked
     property var cfg_orderWorkspacesBy
 
     CheckBox {
@@ -33,13 +32,6 @@ Kirigami.FormLayout {
         text : i18n("Color the whole workspace if urgent")
         checked : plasmoid.configuration.urgentColorWholeWorkspace
         onCheckedChanged : plasmoid.configuration.urgentColorWholeWorkspace = checked
-    }
-
-    CheckBox {
-        id : colorWorkspaceByScreen
-        text : i18n("Color workspaces by screen")
-        checked : plasmoid.configuration.colorWorkspaceByScreen
-        onCheckedChanged : plasmoid.configuration.colorWorkspaceByScreen = checked
     }
 
     ColumnLayout {

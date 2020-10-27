@@ -14,12 +14,21 @@ ColumnLayout {
     property var cfg_screenNameList
     property var cfg_screenColorList
     property var cfg_screenColorOpacity
+    property alias cfg_colorWorkspaceByScreen : colorWorkspaceByScreen.checked
 
     I3Pager {
         id : i3pager
     }
 
     Kirigami.FormLayout {
+        CheckBox {
+            Kirigami.FormData.label : i18n("Color workspaces by screen:")
+
+            id : colorWorkspaceByScreen
+            checked : plasmoid.configuration.colorWorkspaceByScreen
+            onCheckedChanged : plasmoid.configuration.colorWorkspaceByScreen = checked
+        }
+
         Slider {
             Kirigami.FormData.label : i18n("Workspace color opacity:")
 

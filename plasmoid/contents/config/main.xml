@@ -17,25 +17,25 @@
 				true
 			</default>
 		</entry>
+		<entry name="orderWorkspacesBy" type="String">
+			<default>
+				default
+			</default>
+		</entry>
+	</group>
+	<group name="Screens">
 		<entry name="colorWorkspaceByScreen" type="Bool">
 			<default>
 				false
 			</default>
 		</entry>
-		<entry name="orderWorkspacesBy" type="String">
-			<default>
-				"default"
-			</default>
-		</entry>
-	</group>
-	<group name="Screens">
 		<entry name="screenNameList" type="StringList">
 		</entry>
 		<entry name="screenColorList" type="StringList">
 		</entry>
-		<entry name="screenColorOpacity" type="Int">
+		<entry name="screenColorOpacity" type="Double">
 			<default>
-				50
+				0.5
 			</default>
 		</entry>
 	</group>
