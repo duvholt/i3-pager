@@ -23,7 +23,9 @@
 			</default>
 		</entry>
 		<entry name="orderWorkspacesBy" type="String">
-			"default"
+			<default>
+				"default"
+			</default>
 		</entry>
 	</group>
 	<group name="Screens">
