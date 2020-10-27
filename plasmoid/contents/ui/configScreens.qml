@@ -13,9 +13,26 @@ ColumnLayout {
 
     property var cfg_screenNameList
     property var cfg_screenColorList
+    property var cfg_screenColorOpacity
 
     I3Pager {
         id : i3pager
+    }
+
+    Kirigami.FormLayout {
+        Slider {
+            Kirigami.FormData.label : i18n("Workspace color opacity:")
+
+            id : screenColorOpacity
+            from : 0
+            to : 1
+            stepSize : 0.05
+            snapMode : Slider.SnapAlways
+            value : cfg_screenColorOpacity
+            onMoved : {
+                ScreensJS.saveConfig();
+            }
+        }
     }
 
     ScrollView {
@@ -105,7 +122,6 @@ ColumnLayout {
                         ColorDialog {
                             id : colorDialog
                             title : "Please choose a screen color"
-                            showAlphaChannel : true
                             onAccepted : {
                                 screenListModel.set(index, {
                                     screenName: screenName,
