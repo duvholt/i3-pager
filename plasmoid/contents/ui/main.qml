@@ -50,6 +50,9 @@ ColumnLayout {
         onScreenNameListChanged : {
             i3pager.updateWorkspaces();
         }
+        onIndicatorPositionChanged : {
+            i3pager.updateWorkspaces();
+        }
     }
 
     // Hack to update current screen
@@ -117,7 +120,14 @@ ColumnLayout {
                     width : textRow.width
 
                     Rectangle {
-                        anchors.bottom : parent.bottom
+                        Component.onCompleted : {
+                            if (plasmoid.configuration.indicatorPosition == "top") {
+                                anchors.top = parent.top;
+                            } else {
+                                anchors.bottom = parent.bottom;
+                            }
+                        }
+
                         height : 5
                         width : textRow.width
                         radius : 3

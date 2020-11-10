@@ -27,6 +27,11 @@
 				underline
 			</default>
 		</entry>
+		<entry name="indicatorPosition" type="String">
+			<default>
+				bottom
+			</default>
+		</entry>
 	</group>
 	<group name="Screens">
 		<entry name="colorWorkspaceByScreen" type="Bool">

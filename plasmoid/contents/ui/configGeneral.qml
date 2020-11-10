@@ -13,6 +13,7 @@ Kirigami.FormLayout {
     property alias cfg_urgentColorWholeWorkspace : urgentColorWholeWorkspace.checked
     property var cfg_orderWorkspacesBy
     property var cfg_style
+    property var cfg_indicatorPosition
 
     ColumnLayout {
         Kirigami.FormData.label : i18n("Basic:")
@@ -90,6 +91,34 @@ Kirigami.FormLayout {
             checked : cfg_style == "border"
             onClicked : {
                 cfg_style = "border"
+            }
+        }
+    }
+
+    Item {
+        Kirigami.FormData.isSection : true
+    }
+
+    ColumnLayout {
+        Kirigami.FormData.label : i18n("Indicator position:")
+        Kirigami.FormData.buddyFor : indicatorPositionTopRadio
+        visible : cfg_style == "underline"
+
+        RadioButton {
+            id : indicatorPositionTopRadio
+            text : i18n("Top")
+            checked : cfg_indicatorPosition == "top"
+            onClicked : {
+                cfg_indicatorPosition = "top"
+            }
+        }
+
+        RadioButton {
+            id : indicatorPositionBottomRadio
+            text : i18n("Bottom")
+            checked : cfg_indicatorPosition == "bottom"
+            onClicked : {
+                cfg_indicatorPosition = "bottom"
             }
         }
     }
