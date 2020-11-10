@@ -65,7 +65,7 @@ ColumnLayout {
         Repeater {
             id : repeater
 
-            MouseArea { // Border style
+            MouseArea {
                 id : mouseArea
                 hoverEnabled : true
                 cursorShape : Qt.PointingHandCursor
@@ -74,37 +74,54 @@ ColumnLayout {
                 }
                 width : textRow.width
                 height : root.height
+                function getIndicatorColor() {
+                    if (mouseArea.containsMouse) {
+                        return mouseWorkspace;
+                    } else if (modelData.urgent && !plasmoid.configuration.urgentColorWholeWorkspace) {
+                        return urgentWorkspace;
+                    } else if (modelData.focused) {
+                        return focusedWorkspace;
+                    } else if (modelData.visible) {
+                        return visibleWorkspace;
+                    }
+                    return defaultWorkspace;
+                }
+                function getFillColor() {
+                    if (modelData.urgent && plasmoid.configuration.urgentColorWholeWorkspace) {
+                        return urgentWorkspace;
+                    } else if (!plasmoid.configuration.colorWorkspaceByScreen) {
+                        return "transparent";
+                    }
+                    var indexOfScreen = plasmoid.configuration.screenNameList.indexOf(modelData.output);
+                    var screenColor = plasmoid.configuration.screenColorList[indexOfScreen];
+                    return screenColor;
+                }
 
-                Rectangle {
-                    function getFillColor() {
-                        if (modelData.urgent && plasmoid.configuration.urgentColorWholeWorkspace) {
-                            return urgentWorkspace;
-                        } else if (!plasmoid.configuration.colorWorkspaceByScreen) {
-                            return "transparent";
-                        }
-                        var indexOfScreen = plasmoid.configuration.screenNameList.indexOf(modelData.output);
-                        var screenColor = plasmoid.configuration.screenColorList[indexOfScreen];
-                        return screenColor;
-                    }
-                    function getBorderColor() {
-                        if (mouseArea.containsMouse) {
-                            return mouseWorkspace;
-                        } else if (modelData.urgent && !plasmoid.configuration.urgentColorWholeWorkspace) {
-                            return urgentWorkspace;
-                        } else if (modelData.focused) {
-                            return focusedWorkspace;
-                        } else if (modelData.visible) {
-                            return visibleWorkspace;
-                        }
-                        return defaultWorkspace;
-                    }
-                    color : getFillColor()
+                Rectangle { // Border style
+                    visible : plasmoid.configuration.style == "border"
+                    color : mouseArea.getFillColor()
                     radius : 3
                     height : textRow.height
                     width : textRow.width
                     border {
                         width : 2
-                        color : getBorderColor()
+                        color : mouseArea.getIndicatorColor()
+                    }
+                }
+
+                Rectangle { // Underline style
+                    visible : plasmoid.configuration.style == "underline"
+                    color : mouseArea.getFillColor()
+                    radius : 3
+                    height : textRow.height
+                    width : textRow.width
+
+                    Rectangle {
+                        anchors.bottom : parent.bottom
+                        height : 5
+                        width : textRow.width
+                        radius : 3
+                        color : mouseArea.getIndicatorColor()
                     }
                 }
 
