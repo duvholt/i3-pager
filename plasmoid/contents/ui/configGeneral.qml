@@ -14,25 +14,30 @@ Kirigami.FormLayout {
     property var cfg_orderWorkspacesBy
     property var cfg_style
 
-    CheckBox {
-        id : showWorkspaceNames
-        text : i18n("Show workspace names")
-        checked : plasmoid.configuration.showWorkspaceNames
-        onCheckedChanged : plasmoid.configuration.showWorkspaceNames = checked
-    }
+    ColumnLayout {
+        Kirigami.FormData.label : i18n("Basic:")
+        Kirigami.FormData.buddyFor : showWorkspaceNames
 
-    CheckBox {
-        id : filterByCurrentScreen
-        text : i18n("Filter workspaces by current screen")
-        checked : plasmoid.configuration.filterByCurrentScreen
-        onCheckedChanged : plasmoid.configuration.filterByCurrentScreen = checked
-    }
+        CheckBox {
+            id : showWorkspaceNames
+            text : i18n("Show workspace names")
+            checked : plasmoid.configuration.showWorkspaceNames
+            onCheckedChanged : plasmoid.configuration.showWorkspaceNames = checked
+        }
 
-    CheckBox {
-        id : urgentColorWholeWorkspace
-        text : i18n("Color the whole workspace if urgent")
-        checked : plasmoid.configuration.urgentColorWholeWorkspace
-        onCheckedChanged : plasmoid.configuration.urgentColorWholeWorkspace = checked
+        CheckBox {
+            id : filterByCurrentScreen
+            text : i18n("Filter workspaces by current screen")
+            checked : plasmoid.configuration.filterByCurrentScreen
+            onCheckedChanged : plasmoid.configuration.filterByCurrentScreen = checked
+        }
+
+        CheckBox {
+            id : urgentColorWholeWorkspace
+            text : i18n("Color the whole workspace if urgent")
+            checked : plasmoid.configuration.urgentColorWholeWorkspace
+            onCheckedChanged : plasmoid.configuration.urgentColorWholeWorkspace = checked
+        }
     }
 
     ColumnLayout {
