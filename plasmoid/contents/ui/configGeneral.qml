@@ -12,6 +12,7 @@ Kirigami.FormLayout {
     property alias cfg_filterByCurrentScreen : filterByCurrentScreen.checked
     property alias cfg_urgentColorWholeWorkspace : urgentColorWholeWorkspace.checked
     property var cfg_orderWorkspacesBy
+    property var cfg_style
 
     CheckBox {
         id : showWorkspaceNames
@@ -53,6 +54,29 @@ Kirigami.FormLayout {
             checked : cfg_orderWorkspacesBy == "screen"
             onClicked : {
                 cfg_orderWorkspacesBy = "screen"
+            }
+        }
+    }
+
+    ColumnLayout {
+        Kirigami.FormData.label : i18n("Style:")
+        Kirigami.FormData.buddyFor : styleUnderlineRadio
+
+        RadioButton {
+            id : styleUnderlineRadio
+            text : i18n("Underline")
+            checked : cfg_style == "underline"
+            onClicked : {
+                cfg_style = "underline"
+            }
+        }
+
+        RadioButton {
+            id : styleBorderRadio
+            text : i18n("Border")
+            checked : cfg_style == "border"
+            onClicked : {
+                cfg_style = "border"
             }
         }
     }

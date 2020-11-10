@@ -22,6 +22,11 @@
 				default
 			</default>
 		</entry>
+		<entry name="style" type="String">
+			<default>
+				underline
+			</default>
+		</entry>
 	</group>
 	<group name="Screens">
 		<entry name="colorWorkspaceByScreen" type="Bool">
