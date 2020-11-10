@@ -73,15 +73,15 @@ Kirigami.FormLayout {
     }
 
     ColumnLayout {
-        Kirigami.FormData.label : i18n("Style:")
+        Kirigami.FormData.label : i18n("Indicator style:")
         Kirigami.FormData.buddyFor : styleUnderlineRadio
 
         RadioButton {
             id : styleUnderlineRadio
-            text : i18n("Underline")
-            checked : cfg_style == "underline"
+            text : i18n("Line")
+            checked : cfg_style == "line"
             onClicked : {
-                cfg_style = "underline"
+                cfg_style = "line"
             }
         }
 
@@ -102,7 +102,7 @@ Kirigami.FormLayout {
     ColumnLayout {
         Kirigami.FormData.label : i18n("Indicator position:")
         Kirigami.FormData.buddyFor : indicatorPositionTopRadio
-        visible : cfg_style == "underline"
+        visible : cfg_style == "line"
 
         RadioButton {
             id : indicatorPositionTopRadio

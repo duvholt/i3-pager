@@ -24,7 +24,7 @@
 		</entry>
 		<entry name="style" type="String">
 			<default>
-				underline
+				line
 			</default>
 		</entry>
 		<entry name="indicatorPosition" type="String">

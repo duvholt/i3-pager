@@ -113,7 +113,7 @@ ColumnLayout {
                 }
 
                 Rectangle { // Underline style
-                    visible : plasmoid.configuration.style == "underline"
+                    visible : plasmoid.configuration.style == "line"
                     color : mouseArea.getFillColor()
                     radius : 3
                     height : textRow.height
