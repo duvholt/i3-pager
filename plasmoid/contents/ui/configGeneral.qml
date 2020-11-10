@@ -36,8 +36,10 @@ Kirigami.FormLayout {
 
     ColumnLayout {
         Kirigami.FormData.label : i18n("Order workspaces by:")
+        Kirigami.FormData.buddyFor : orderWorkspacesByDefaultRadio
 
         RadioButton {
+            id : orderWorkspacesByDefaultRadio
             text : i18n("Default")
             checked : cfg_orderWorkspacesBy == "default"
             onClicked : {
@@ -46,6 +48,7 @@ Kirigami.FormLayout {
         }
 
         RadioButton {
+            id : orderWorkspacesByScreenRadio
             text : i18n("Screen")
             checked : cfg_orderWorkspacesBy == "screen"
             onClicked : {
