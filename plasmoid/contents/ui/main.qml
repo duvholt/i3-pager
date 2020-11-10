@@ -65,7 +65,7 @@ ColumnLayout {
         Repeater {
             id : repeater
 
-            MouseArea {
+            MouseArea { // Border style
                 id : mouseArea
                 hoverEnabled : true
                 cursorShape : Qt.PointingHandCursor
@@ -79,6 +79,8 @@ ColumnLayout {
                     function getFillColor() {
                         if (modelData.urgent && plasmoid.configuration.urgentColorWholeWorkspace) {
                             return urgentWorkspace;
+                        } else if (!plasmoid.configuration.colorWorkspaceByScreen) {
+                            return "transparent";
                         }
                         var indexOfScreen = plasmoid.configuration.screenNameList.indexOf(modelData.output);
                         var screenColor = plasmoid.configuration.screenColorList[indexOfScreen];
@@ -97,7 +99,6 @@ ColumnLayout {
                         return defaultWorkspace;
                     }
                     color : getFillColor()
-                    visible : plasmoid.configuration.colorWorkspaceByScreen
                     radius : 3
                     height : textRow.height
                     width : textRow.width
