@@ -3,8 +3,6 @@ function saveConfig() {
     cfg_screenNameList = [];
     cfg_screenColorList = [];
 
-    cfg_screenColorOpacity = screenColorOpacity.value;
-
     for (var i = 0; i < screenListModel.count; i++) {
         var name = screenListModel.get(i).screenName;
         var color = Qt.lighter(screenListModel.get(i).screenColor, 1);

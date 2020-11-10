@@ -29,17 +29,31 @@ ColumnLayout {
             onCheckedChanged : plasmoid.configuration.colorWorkspaceByScreen = checked
         }
 
-        Slider {
-            Kirigami.FormData.label : i18n("Workspace color opacity:")
+        RowLayout {
+            Slider {
+                Kirigami.FormData.label : i18n("Workspace color opacity:")
 
-            id : screenColorOpacity
-            from : 0
-            to : 1
-            stepSize : 0.05
-            snapMode : Slider.SnapAlways
-            value : cfg_screenColorOpacity
-            onMoved : {
-                ScreensJS.saveConfig();
+                id : screenColorOpacity
+                from : 0
+                to : 1
+                stepSize : 0.05
+                snapMode : Slider.SnapAlways
+                value : cfg_screenColorOpacity
+                onMoved : {
+                    cfg_screenColorOpacity = value;
+                    ScreensJS.saveConfig();
+                }
+            }
+
+            SpinBox {
+                from : 0
+                to : 100
+                stepSize : 5
+                value : cfg_screenColorOpacity * 100
+                onValueModified : {
+                    cfg_screenColorOpacity = value / 100;
+                    ScreensJS.saveConfig();
+                }
             }
         }
     }
