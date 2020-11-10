@@ -40,6 +40,10 @@ Kirigami.FormLayout {
         }
     }
 
+    Item {
+        Kirigami.FormData.isSection : true
+    }
+
     ColumnLayout {
         Kirigami.FormData.label : i18n("Order workspaces by:")
         Kirigami.FormData.buddyFor : orderWorkspacesByDefaultRadio
@@ -61,6 +65,10 @@ Kirigami.FormLayout {
                 cfg_orderWorkspacesBy = "screen"
             }
         }
+    }
+
+    Item {
+        Kirigami.FormData.isSection : true
     }
 
     ColumnLayout {
