@@ -11,6 +11,7 @@ Kirigami.FormLayout {
     property alias cfg_showWorkspaceNames : showWorkspaceNames.checked
     property alias cfg_filterByCurrentScreen : filterByCurrentScreen.checked
     property alias cfg_urgentColorWholeWorkspace : urgentColorWholeWorkspace.checked
+    property alias cfg_rounded : rounded.checked
     property var cfg_orderWorkspacesBy
     property var cfg_style
     property var cfg_indicatorPosition
@@ -38,6 +39,13 @@ Kirigami.FormLayout {
             text : i18n("Color the whole workspace if urgent")
             checked : plasmoid.configuration.urgentColorWholeWorkspace
             onCheckedChanged : plasmoid.configuration.urgentColorWholeWorkspace = checked
+        }
+
+        CheckBox {
+            id : rounded
+            text : i18n("Rounded corners")
+            checked : plasmoid.configuration.rounded
+            onCheckedChanged : plasmoid.configuration.rounded = checked
         }
     }
 

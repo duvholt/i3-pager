@@ -22,6 +22,11 @@
 				default
 			</default>
 		</entry>
+		<entry name="rounded" type="Bool">
+			<default>
+				true
+			</default>
+		</entry>
 		<entry name="style" type="String">
 			<default>
 				line

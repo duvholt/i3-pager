@@ -99,11 +99,14 @@ ColumnLayout {
                     var screenColor = plasmoid.configuration.screenColorList[indexOfScreen];
                     return screenColor;
                 }
+                function getRadius() {
+                    return plasmoid.configuration.rounded ? 3 : 0;
+                }
 
                 Rectangle { // Border style
                     visible : plasmoid.configuration.style == "border"
                     color : mouseArea.getFillColor()
-                    radius : 3
+                    radius : getRadius()
                     height : textRow.height
                     width : textRow.width
                     border {
@@ -115,7 +118,7 @@ ColumnLayout {
                 Rectangle { // Underline style
                     visible : plasmoid.configuration.style == "line"
                     color : mouseArea.getFillColor()
-                    radius : 3
+                    radius : getRadius()
                     height : textRow.height
                     width : textRow.width
 
@@ -130,7 +133,7 @@ ColumnLayout {
 
                         height : 5
                         width : textRow.width
-                        radius : 3
+                        radius : getRadius()
                         color : mouseArea.getIndicatorColor()
                     }
                 }
