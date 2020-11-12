@@ -30,9 +30,9 @@ ColumnLayout {
         }
 
         RowLayout {
-            Slider {
-                Kirigami.FormData.label : i18n("Workspace color opacity:")
+            Kirigami.FormData.label : i18n("Workspace color opacity:")
 
+            Slider {
                 id : screenColorOpacity
                 from : 0
                 to : 1
