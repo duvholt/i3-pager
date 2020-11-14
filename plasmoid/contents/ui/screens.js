@@ -27,14 +27,8 @@ function loadNewScreens() {
     var defaultColors = ["#004040", "#007D7D", "#00D7D7"];
     for (var screenName of i3pager.getScreenNames()) {
         if (!isScreenNameOnList(screenName, cfg_screenNameList)) {
-            if (screenListModel.count >= defaultColors.length) {
-                screenListModel.append({screenName: screenName, screenColor: defaultColors[2]});
-            } else {
-                screenListModel.append({
-                    screenName: screenName,
-                    screenColor: defaultColors[screenListModel.count]
-                });
-            }
+            var colorIndex = Math.min(screenListModel.count, defaultColors.length - 1);
+            screenListModel.append({screenName: screenName, screenColor: defaultColors[colorIndex]});
         }
     }
 }
