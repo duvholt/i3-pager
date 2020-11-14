@@ -14,15 +14,8 @@ ColumnLayout {
     readonly property color urgentWorkspace : theme.negativeTextColor
     readonly property color mouseWorkspace : theme.linkColor
 
-    function colorWithAlpha(color, alpha) {
-        console.log(color.r);
-        return Qt.rgba(color.r, color.g, color.b, alpha);
-    }
-
     id : root
     Plasmoid.preferredRepresentation : Plasmoid.fullRepresentation
-    Layout.fillHeight : true
-    spacing : 0
 
     I3Pager {
         id : i3pager
