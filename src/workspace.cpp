@@ -13,3 +13,18 @@ QList<Workspace> Workspace::filterByCurrentScreen(QList<Workspace> inputWorkspac
     }
     return outputWorkspaces;
 }
+
+QList<Workspace> Workspace::orderByOutput(QList<Workspace> inputWorkspaces, QList<QString> outputList) {
+    QList<Workspace> outputWorkspaces;
+    qInfo() << "Ordering workspaces by screens:" << outputList;
+    for (auto output : outputList) {
+        for (auto workspace : inputWorkspaces) {
+            if (workspace.output == output) {
+                qInfo() << "Added workspace:" << workspace.name << "output:" << workspace.output;
+                outputWorkspaces.append(workspace);
+            }
+        }
+    }
+
+    return outputWorkspaces;
+}

@@ -1,8 +1,8 @@
 #ifndef I3PAGER_PLASMOID_H
 #define I3PAGER_PLASMOID_H
 
-#include "workspace.h"
 #include "i3listener.h"
+#include "workspace.h"
 #include <QApplication>
 #include <QDebug>
 #include <QDesktopWidget>
@@ -30,7 +30,8 @@ public:
 
 public Q_SLOTS:
     QString getCurrentScreen();
-    QList<Workspace> getWorkspaces(bool filterByCurrentScreen);
+    QList<Workspace> getWorkspaces(bool filterByCurrentScreen, QString orderWorkspacesBy, QList<QString> screenOrder);
+    QList<QString> getScreenNames();
     QString getMode();
 
 Q_SIGNALS:
