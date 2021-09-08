@@ -6,17 +6,21 @@ A plasmoid for integrating i3 with KDE Plasma.
 
 ## Installation
 
-+ Make sure `extra-cmake-modules` is installed.
++ Install system dependencies libsigc++-2.0 libjsoncpp extra-cmake-modules
+  +  For Debian based distros:
+      ```
+      sudo apt install -y libsigc++-2.0-dev libjsoncpp-dev extra-cmake-modules
+      ```
 
 + Build and install i3-pager:
 
-```bash
-git clone https://github.com/duvholt/i3-pager.git --recurse-submodules
-cd i3-pager
-cmake -DCMAKE_INSTALL_PREFIX=$(kf5-config --prefix)  -B build .
-make -C build
-sudo make -C build install
-```
+  ```bash
+  git clone https://github.com/duvholt/i3-pager.git --recurse-submodules
+  cd i3-pager
+  cmake -DCMAKE_INSTALL_PREFIX=$(kf5-config --prefix)  -B build .
+  make -C build
+  sudo make -C build install
+  ```
 
 + Add i3-pager plasmoid to either Plasma dock or Latte-dock.
 
