@@ -17,8 +17,8 @@ A plasmoid for integrating i3 with KDE Plasma.
   ```bash
   git clone https://github.com/duvholt/i3-pager.git --recurse-submodules
   cd i3-pager
-  cmake -DCMAKE_INSTALL_PREFIX=$(kf5-config --prefix)  -B build .
-  make -C build
+  cmake -DCMAKE_INSTALL_PREFIX=$(kf5-config --prefix) -DCMAKE_BUILD_TYPE=Release -B build
+  make -j $(nproc) -C build
   sudo make -C build install
   ```
 
@@ -62,3 +62,35 @@ Select an icon and click `Copy Unicode Glyph`.
 If you can't see any icons make sure `Font Awesome` is installed as `Font Awesome 5 Free Solid`. Try running `fc-match "Font Awesome 5 Free Solid"` and see if you get a match.
 
 You can choose to hide workspace names in the plasmoid settings.
+
+
+## Development
+
+Build with debug mode:
+```bash
+cmake -DCMAKE_INSTALL_PREFIX=$(kf5-config --prefix) -DCMAKE_BUILD_TYPE=Debug -B build
+make -C build
+sudo make -C build install
+```
+
+This will install the plasmoid globally as I'm not aware of a way to access the plasmoid C++ plugin without globally installing it. To see changes restart Plasma:
+
+```
+killall plasmashell; kstart5 plasmashell
+```
+
+### Plasmoid
+
+The `plasmoid` folder contains the code for the widget and settings.
+
+To quickly prototype changes use plasmoidviewer:
+```bash
+plasmoidviewer --applet plasmoid
+```
+
+For better logging override QT's log format:
+```
+QT_MESSAGE_PATTERN="[%{type}] (%{function}:%{line}) - %{message}" plasmoidviewer --applet plasmoid
+```
+
+To see changes in plasmoidviewer has to be restarted, but there is no need to run make unless there are changes in the C++ plugin.
