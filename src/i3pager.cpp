@@ -35,11 +35,11 @@ QList<QString> I3Pager::getScreenNames() {
         for (auto& screen : screens) {
             if (screen->active) {
                 screenList.append(QString::fromStdString(screen->name));
-                qInfo() << "Screen name:" << QString::fromStdString(screen->name);
+                qDebug() << "Screen name:" << QString::fromStdString(screen->name);
             }
         }
-    } catch (...) {
-        qWarning() << "i3ipc error";
+    } catch (std::exception const& e) {
+        qWarning() << "Exception while retrieving screen names: " << e.what();
     }
 
     return screenList;
@@ -50,7 +50,7 @@ QList<Workspace> I3Pager::getWorkspaces(bool filterByCurrentScreen, QString orde
     try {
         i3ipc::connection conn;
         auto i3workspaceList = conn.get_workspaces();
-        qInfo() << "Loading workspaces:";
+        qDebug() << "Loading workspaces:";
 
         for (auto& i3workspace : i3workspaceList) {
             Workspace workspace;
@@ -66,8 +66,8 @@ QList<Workspace> I3Pager::getWorkspaces(bool filterByCurrentScreen, QString orde
             workspace.visible = i3workspace->visible;
             workspace.urgent = i3workspace->urgent;
 
-            qInfo() << "i3Workspace name:" << QString::fromStdString(i3workspace->name);
-            qInfo() << "Workspace:"
+            qDebug() << "i3Workspace name:" << QString::fromStdString(i3workspace->name);
+            qDebug() << "Workspace:"
                     << "id:" << workspace.id
                     << "index:" << workspace.index
                     << "name:" << workspace.name
@@ -78,8 +78,8 @@ QList<Workspace> I3Pager::getWorkspaces(bool filterByCurrentScreen, QString orde
                     << "output:" << workspace.output;
             workspaceList.append(workspace);
         }
-    } catch (...) {
-        qWarning() << "i3ipc error";
+    } catch (std::exception const& e) {
+        qWarning() << "Exception while retrieving workspaces:" << e.what();
     }
 
     if (filterByCurrentScreen) {
