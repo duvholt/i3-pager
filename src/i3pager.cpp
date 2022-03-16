@@ -45,13 +45,13 @@ QList<QString> I3Pager::getScreenNames() {
     return screenList;
 }
 
-QList<Workspace> I3Pager::getWorkspaces(bool filterByCurrentScreen,bool filterByIndex, QString orderWorkspacesBy, QList<QString> screenOrder) {
+QList<Workspace> I3Pager::getWorkspaces(bool filterByCurrentScreen, QString orderWorkspacesBy, QList<QString> screenOrder) {
     QList<Workspace> workspaceList;
     try {
         i3ipc::connection conn;
         auto i3workspaceList = conn.get_workspaces();
         qDebug() << "Loading workspaces:";
-        qDebug() << "Variables,CurrentScreen:"<<filterByCurrentScreen<<"Index:"<<filterByIndex;
+        qDebug() << "Variables,CurrentScreen:"<<filterByCurrentScreen<<", orderBy:"<<orderWorkspacesBy;
 
         for (auto& i3workspace : i3workspaceList) {
             Workspace workspace;
@@ -87,15 +87,13 @@ QList<Workspace> I3Pager::getWorkspaces(bool filterByCurrentScreen,bool filterBy
         workspaceList = Workspace::filterByCurrentScreen(workspaceList, this->currentScreenPrivate);
     }
 
-    qDebug()<<"OUTER REEEEEEEACHED";
-    if (filterByIndex) {
-        qDebug()<<"REEEEEEEACHED";
-        workspaceList = Workspace::filterByIndex(workspaceList);
-    }
-
     if (orderWorkspacesBy == "screen" && !screenOrder.isEmpty()) {
         workspaceList = Workspace::orderByOutput(workspaceList, screenOrder);
     }
+    else if (orderWorkspacesBy == "name"){
+        workspaceList = Workspace::orderByName(workspaceList);
+    }
+
     return workspaceList;
 }
 

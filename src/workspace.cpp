@@ -15,9 +15,9 @@ QList<Workspace> Workspace::filterByCurrentScreen(QList<Workspace> inputWorkspac
     return outputWorkspaces;
 }
 
-QList<Workspace> Workspace::filterByIndex(QList<Workspace> inputWorkspaces) {
+QList<Workspace> Workspace::orderByName(QList<Workspace> inputWorkspaces) {
     std::sort(inputWorkspaces.begin(),inputWorkspaces.end(),[](Workspace a,Workspace b){
-            return (a.index<b.index);
+            return (a.id<b.id);  //NOTICE as the variables are named right now the full name is copied on the id!
             });
     return inputWorkspaces;
 }

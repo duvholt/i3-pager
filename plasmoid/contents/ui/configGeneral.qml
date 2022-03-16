@@ -33,12 +33,6 @@ Kirigami.FormLayout {
             checked : plasmoid.configuration.filterByCurrentScreen
             onCheckedChanged : plasmoid.configuration.filterByCurrentScreen = checked
         }
-        CheckBox {
-            id : filterByIndex
-            text : i18n("Filter workspaces by index")
-            checked : plasmoid.configuration.filterByIndex
-            onCheckedChanged : plasmoid.configuration.filterByIndex = checked
-        }
 
         CheckBox {
             id : urgentColorWholeWorkspace
@@ -80,12 +74,13 @@ Kirigami.FormLayout {
                 cfg_orderWorkspacesBy = "screen"
             }
         }
+        
         RadioButton {
-            id : orderWorkspacesByIndex
-            text : i18n("Index")
-            checked : cfg_orderWorkspacesBy == "index"
+            id : orderWorkspacesByName
+            text : i18n("Name")
+            checked : cfg_orderWorkspacesBy == "name"
             onClicked : {
-                cfg_orderWorkspacesBy = "index"
+                cfg_orderWorkspacesBy = "name"
             }
         }
     }
