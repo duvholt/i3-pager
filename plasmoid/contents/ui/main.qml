@@ -28,7 +28,9 @@ ColumnLayout {
             for (var screenName of plasmoid.configuration.screenNameList) {
                 screenNameList.push(screenName);
             }
-            repeater.model = i3pager.getWorkspaces(plasmoid.configuration.filterByCurrentScreen, plasmoid.configuration.orderWorkspacesBy, screenNameList);
+            repeater.model = i3pager.getWorkspaces(plasmoid.configuration.filterByCurrentScreen, 
+                                                   plasmoid.configuration.filterByIndex,
+                                                   plasmoid.configuration.orderWorkspacesBy, screenNameList);
         }
     }
 

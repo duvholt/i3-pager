@@ -16,6 +16,7 @@ class Workspace {
     Q_PROPERTY(bool urgent MEMBER urgent)
 public:
     static QList<Workspace> filterByCurrentScreen(QList<Workspace> inputWorkspaces, QString currentScreen);
+    static QList<Workspace> filterByIndex(QList<Workspace> inputWorkspaces);
     static QList<Workspace> orderByOutput(QList<Workspace> inputWorkspaces, QList<QString> workspaceNameList);
     QString id;
     QString index;

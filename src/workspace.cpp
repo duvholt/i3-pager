@@ -1,4 +1,5 @@
 #include "workspace.h"
+#include <algorithm>
 
 QList<Workspace> Workspace::filterByCurrentScreen(QList<Workspace> inputWorkspaces, QString currentScreen) {
     QList<Workspace> outputWorkspaces;
@@ -12,6 +13,13 @@ QList<Workspace> Workspace::filterByCurrentScreen(QList<Workspace> inputWorkspac
         }
     }
     return outputWorkspaces;
+}
+
+QList<Workspace> Workspace::filterByIndex(QList<Workspace> inputWorkspaces) {
+    std::sort(inputWorkspaces.begin(),inputWorkspaces.end(),[](Workspace a,Workspace b){
+            return (a.index<b.index);
+            });
+    return inputWorkspaces;
 }
 
 QList<Workspace> Workspace::orderByOutput(QList<Workspace> inputWorkspaces, QList<QString> outputList) {
