@@ -89,6 +89,10 @@ QList<Workspace> I3Pager::getWorkspaces(bool filterByCurrentScreen, QString orde
     if (orderWorkspacesBy == "screen" && !screenOrder.isEmpty()) {
         workspaceList = Workspace::orderByOutput(workspaceList, screenOrder);
     }
+    else if (orderWorkspacesBy == "name") {
+        workspaceList = Workspace::orderByName(workspaceList);
+    }
+
     return workspaceList;
 }
 

@@ -74,6 +74,15 @@ Kirigami.FormLayout {
                 cfg_orderWorkspacesBy = "screen"
             }
         }
+        
+        RadioButton {
+            id : orderWorkspacesByName
+            text : i18n("Name")
+            checked : cfg_orderWorkspacesBy == "name"
+            onClicked : {
+                cfg_orderWorkspacesBy = "name"
+            }
+        }
     }
 
     Item {
