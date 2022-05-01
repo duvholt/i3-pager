@@ -6,10 +6,11 @@ A plasmoid for integrating i3 with KDE Plasma.
 
 ## Installation
 
-+ Install system dependencies libsigc++-2.0 libjsoncpp extra-cmake-modules
-  +  For Debian based distros:
-      ```
-      sudo apt install -y libsigc++-2.0-dev libjsoncpp-dev extra-cmake-modules
++ Install system dependencies: libsigc++-2.0 libjsoncpp extra-cmake-modules qt-labs-qmlmodels make cmake
+  + For Debian based distros:
+
+      ```sh
+      sudo apt install -y libsigc++-2.0-dev libjsoncpp-dev extra-cmake-modules qml-module-qt-labs-qmlmodels make cmake
       ```
 
 + Build and install i3-pager:
@@ -63,10 +64,10 @@ If you can't see any icons make sure `Font Awesome` is installed as `Font Awesom
 
 You can choose to hide workspace names in the plasmoid settings.
 
-
 ## Development
 
 Build with debug mode:
+
 ```bash
 cmake -DCMAKE_INSTALL_PREFIX=$(kf5-config --prefix) -DCMAKE_BUILD_TYPE=Debug -B build
 make -C build
@@ -84,11 +85,13 @@ killall plasmashell; kstart5 plasmashell
 The `plasmoid` folder contains the code for the widget and settings.
 
 To quickly prototype changes use plasmoidviewer:
+
 ```bash
 plasmoidviewer --applet plasmoid
 ```
 
 For better logging override QT's log format:
+
 ```
 QT_MESSAGE_PATTERN="[%{type}] (%{function}:%{line}) - %{message}" plasmoidviewer --applet plasmoid
 ```
