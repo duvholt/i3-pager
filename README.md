@@ -6,11 +6,11 @@ A plasmoid for integrating i3 with KDE Plasma.
 
 ## Installation
 
-+ Install system dependencies: libsigc++-2.0 libjsoncpp extra-cmake-modules qt-labs-qmlmodels make cmake
++ Install system dependencies: libsigc++-2.0 libjsoncpp extra-cmake-modules qt-labs-qmlmodels make cmake plasma-framework-dev
   + For Debian based distros:
 
       ```sh
-      sudo apt install -y libsigc++-2.0-dev libjsoncpp-dev extra-cmake-modules qml-module-qt-labs-qmlmodels make cmake
+      sudo apt install -y libsigc++-2.0-dev libjsoncpp-dev extra-cmake-modules qml-module-qt-labs-qmlmodels make cmake plasma-framework-dev
       ```
 
 + Build and install i3-pager:
