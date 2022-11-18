@@ -38,6 +38,7 @@ void I3ListenerThread::handleI3Events() {
         }
     } catch (std::exception const& e) {
         qWarning() << "Exception in i3listener handle events:" << e.what();
+        this->stop();
     }
 }
 
