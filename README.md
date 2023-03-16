@@ -96,3 +96,6 @@ QT_MESSAGE_PATTERN="[%{type}] (%{function}:%{line}) - %{message}" plasmoidviewer
 ```
 
 To see changes in plasmoidviewer has to be restarted, but there is no need to run make unless there are changes in the C++ plugin.
+
+
+hei hei
