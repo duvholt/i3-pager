@@ -8,6 +8,8 @@ include(KDEInstallDirs)
 include(KDECMakeSettings)
 include(KDECompilerSettings)
 
+set(CMAKE_CXX_STANDARD 17)
+
 find_package(KF5Plasma REQUIRED)
 find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Quick Concurrent)
 find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS Plasma)
