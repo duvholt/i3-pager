@@ -1,0 +1,21 @@
+{
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "christian@duvholt.net",
+                "Name": "Christian duvholt"
+            }
+        ],
+        "Description": "i3 Pager",
+        "Id": "org.kde.I3Pager",
+        "License": "GPL",
+        "Name": "i3Pager",
+        "ServiceTypes": [
+            "Plasma/Applet"
+        ],
+        "Version": "1.0",
+        "Website": "plasma.kde.org"
+    },
+    "X-Plasma-API": "declarativeappletscript",
+    "X-Plasma-MainScript": "ui/main.qml"
+}
