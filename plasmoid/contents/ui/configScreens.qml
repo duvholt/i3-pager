@@ -5,7 +5,7 @@ import QtQml.Models 2.1
 import QtQuick.Layouts 1.3
 import QtQuick.Dialogs 1.0
 import org.kde.kirigami 2.10 as Kirigami
-import I3Pager 1.0
+import org.kde.private.I3Pager 1.0
 import "screens.js" as ScreensJS
 
 ColumnLayout {

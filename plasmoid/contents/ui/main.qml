@@ -5,7 +5,7 @@ import QtQuick.Dialogs 1.3
 import QtQuick.Controls.Styles 1.3
 import org.kde.plasma.plasmoid 2.0
 import QtQuick.Window 2.13
-import I3Pager 1.0
+import org.kde.private.I3Pager 1.0
 
 ColumnLayout {
     readonly property color defaultWorkspace : "transparent"

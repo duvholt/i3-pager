@@ -22,5 +22,6 @@ include_directories(${I3IPCpp_INCLUDE_DIRS})
 link_directories(${I3IPCpp_LIBRARY_DIRS})
 target_link_libraries(plasmoidplugin Qt5::Quick Qt5::Widgets KF5::Plasma KF5::WindowSystem ${I3IPCpp_LIBRARIES})
 
-install(TARGETS plasmoidplugin DESTINATION ${QML_INSTALL_DIR}/I3Pager)
-install(FILES qmldir DESTINATION ${QML_INSTALL_DIR}/I3Pager)
+# install plugin
+install(TARGETS  plasmoidplugin DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/private/I3Pager)
+install(FILES qmldir DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/private/I3Pager)
