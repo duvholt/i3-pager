@@ -3,8 +3,8 @@
 
 #include "i3pager.h"
 #include "workspace.h"
+
 #include <QQmlExtensionPlugin>
-#include <QtQml>
 
 class QQmlEngine;
 class Plugin : public QQmlExtensionPlugin {
