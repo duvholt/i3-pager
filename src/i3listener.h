@@ -12,7 +12,7 @@ class I3ListenerThread : public QThread {
     Q_OBJECT
 
 public:
-    explicit I3ListenerThread(QObject* parent = 0);
+    explicit I3ListenerThread(QObject* parent = nullptr);
     void run() override;
     void stop();
 

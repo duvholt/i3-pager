@@ -1,17 +1,28 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.16.0)
 
-find_package(ECM REQUIRED NO_MODULE)
+project(I3Pager)
 
+set(QT_MIN_VERSION "6.6.0")
+set(KF6_MIN_VERSION "6.0.0")
+set(QT_NO_CREATE_VERSIONLESS_FUNCTIONS True)
+
+find_package(ECM ${KF6_MIN_VERSION} REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR} ${CMAKE_MODULE_PATH})
 
 include(KDEInstallDirs)
 include(KDECMakeSettings)
-include(KDECompilerSettings)
+include(KDECompilerSettings NO_POLICY_SCOPE)
 
-find_package(KF5Plasma REQUIRED)
-find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Quick)
-find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS Plasma)
-find_package(KF5WindowSystem)
+include(CMakePackageConfigHelpers)
+include(ECMSetupVersion)
+include(ECMGenerateQmlTypes)
+include(ECMMarkNonGuiExecutable)
+include(ECMQmlModule)
+
+find_package(Qt6 ${QT_MIN_VERSION} REQUIRED NO_MODULE COMPONENTS Quick Widgets)
+find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS WindowSystem Package)
+
+include(/usr/lib/cmake/Plasma/PlasmaMacros.cmake)
 
 plasma_install_package(plasmoid org.kde.I3Pager)
 

@@ -3,7 +3,7 @@
 I3Pager::I3Pager(QObject* parent)
     : QObject(parent) {
     currentScreenPrivate = QString();
-    mode = "default";
+    mode = QStringLiteral("default");
 
     qDebug() << "Starting i3 listener";
     this->i3ListenerThread = new I3ListenerThread(this);
@@ -55,11 +55,11 @@ QList<Workspace> I3Pager::getWorkspaces(bool filterByCurrentScreen, QString orde
         for (auto& i3workspace : i3workspaceList) {
             Workspace workspace;
 
-            auto splitName = QString::fromStdString(i3workspace->name).split(':');
+            auto splitName = QString::fromStdString(i3workspace->name).split(QChar::fromLatin1(':'));
             workspace.id = QString::fromStdString(i3workspace->name);
             workspace.index = splitName[0];
             workspace.name = splitName.size() == 1 ? splitName[0] : splitName[1];
-            workspace.icon = splitName.size() == 3 ? splitName[2] : "";
+            workspace.icon = splitName.size() == 3 ? splitName[2] : QStringLiteral("");
 
             workspace.output = QString::fromStdString(i3workspace->output);
             workspace.focused = i3workspace->focused;
@@ -86,10 +86,10 @@ QList<Workspace> I3Pager::getWorkspaces(bool filterByCurrentScreen, QString orde
         workspaceList = Workspace::filterByCurrentScreen(workspaceList, this->currentScreenPrivate);
     }
 
-    if (orderWorkspacesBy == "screen" && !screenOrder.isEmpty()) {
+    if (orderWorkspacesBy == QStringLiteral("screen") && !screenOrder.isEmpty()) {
         workspaceList = Workspace::orderByOutput(workspaceList, screenOrder);
     }
-    else if (orderWorkspacesBy == "name") {
+    else if (orderWorkspacesBy == QStringLiteral("name")) {
         workspaceList = Workspace::orderByName(workspaceList);
     }
 
