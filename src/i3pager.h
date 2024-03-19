@@ -5,7 +5,6 @@
 #include "workspace.h"
 #include <QApplication>
 #include <QDebug>
-#include <QDesktopWidget>
 #include <QGuiApplication>
 #include <QMetaType>
 #include <QScreen>
@@ -21,7 +20,7 @@ class I3Pager : public QObject {
     Q_PROPERTY(QString mode READ getMode NOTIFY modeChanged)
 
 public:
-    explicit I3Pager(QObject* parent = 0);
+    explicit I3Pager(QObject* parent = nullptr);
     ~I3Pager();
 
     QString getCurrentScreen() const;
