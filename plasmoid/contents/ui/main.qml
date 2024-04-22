@@ -37,16 +37,16 @@ PlasmoidItem {
 
         Connections {
             target : plasmoid.configuration
-            onFilterByCurrentScreenChanged : {
+            function onFilterByCurrentScreenChanged() {
                 i3pager.updateWorkspaces();
             }
-            onOrderWorkspacesByChanged : {
+            function onOrderWorkspacesByChanged() {
                 i3pager.updateWorkspaces();
             }
-            onScreenNameListChanged : {
+            function onScreenNameListChanged() {
                 i3pager.updateWorkspaces();
             }
-            onIndicatorPositionChanged : {
+            function onIndicatorPositionChanged() {
                 i3pager.updateWorkspaces();
             }
         }
