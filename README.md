@@ -4,6 +4,10 @@ A plasmoid for integrating i3 with KDE Plasma.
 
 ![image](https://user-images.githubusercontent.com/1637715/72685652-676b4e80-3aec-11ea-8173-4c20daaa584e.png)
 
+## Plasma 6
+
+The main branch only supports Plasma 6. Checkout the [plasma5](https://github.com/duvholt/i3-pager/tree/plasma5) branch for the last working Plasma 5 code.
+
 ## Installation
 
 + Install system dependencies (for Debian based distros):
