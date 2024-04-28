@@ -5,7 +5,6 @@
 #include "workspace.h"
 #include <QApplication>
 #include <QDebug>
-#include <QDesktopWidget>
 #include <QGuiApplication>
 #include <QMetaType>
 #include <QScreen>
