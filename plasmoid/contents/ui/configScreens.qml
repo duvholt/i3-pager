@@ -1,6 +1,5 @@
 import QtQuick 2.15
 import QtQuick.Controls
-import QtQuick.Templates 2.4 as QQC2
 import Qt.labs.qmlmodels
 import QtQml.Models
 import QtQuick.Layouts
@@ -87,7 +86,7 @@ KCM.SimpleKCM {
 
             Layout.fillWidth : true
             Layout.fillHeight : true
-            contentHeight : screensListView.implicitHeight
+            contentHeight: 200
 
             Component.onCompleted : {
                 scrollView.background.visible = true;
@@ -99,9 +98,9 @@ KCM.SimpleKCM {
 
             ListView {
                 id : screensListView
-                //clip : true FIXME
+                clip : true
 
-                property var visibilityColumnWidth: Kirigami.Units.gridUnit
+                property real colorColumnWidth: Kirigami.Units.gridUnit
 
                 Component.onCompleted : {
                     ScreensJS.loadConfig();
@@ -118,7 +117,6 @@ KCM.SimpleKCM {
                     hoverEnabled : false
                     implicitWidth: contentItem ? contentItem.implicitWidth + leftPadding + rightPadding : Kirigami.Units.gridUnit * 12
                     width: parent && parent.width > 0 ? parent.width : implicitWidth
-                    //Layout.fillWidth: true
 
                     RowLayout {
                         Kirigami.Heading {
@@ -129,40 +127,26 @@ KCM.SimpleKCM {
                         Kirigami.Heading {
                             text : i18n("Color")
                             level : 2
-                            Layout.preferredWidth : screensListView.visibilityColumnWidth
-                            Component.onCompleted : screensListView.visibilityColumnWidth = Math.max(implicitWidth, screensListView.visibilityColumnWidth)
+                            Layout.preferredWidth : screensListView.colorColumnWidth
+                            Component.onCompleted : screensListView.colorColumnWidth = Math.max(implicitWidth, screensListView.colorColumnWidth)
                         }
                         Kirigami.Heading {
                             text : i18n("Actions")
                             level : 2
-                            Layout.preferredWidth : screensListView.visibilityColumnWidth
-                            Component.onCompleted : screensListView.visibilityColumnWidth = Math.max(implicitWidth, screensListView.visibilityColumnWidth)
                         }
                     }
                 }
 
-                delegate : QQC2.ItemDelegate  {
+                delegate: ItemDelegate {
                     highlighted : false
                     hoverEnabled : false
-                    implicitWidth: contentItem ? contentItem.implicitWidth + leftPadding + rightPadding : Kirigami.Units.gridUnit * 12
-                    implicitHeight: contentItem.implicitHeight + topPadding + bottomPadding
-                    width: parent && parent.width > 0 ? parent.width : implicitWidth
-                    Layout.fillWidth: true
+                    width: screensListView.width
                     opacity: 1
 
-                    /* onVisibleChanged: { */
-                    /*     if (visible) { */
-                    /*         height = Qt.binding(() => implicitHeight); */
-                    /*     } else { */
-                    /*         if (ListView.view && ListView.view.visible) { */
-                    /*             height = 0; */
-                    /*         } */
-                    /*     } */
-                    /* } */
-
-
-
                     contentItem : RowLayout {
+                        width: parent.width
+                        spacing: Kirigami.Units.smallSpacing
+
                         Label {
                             Layout.fillWidth : true
                             text : screenName
@@ -172,11 +156,13 @@ KCM.SimpleKCM {
                             hoverEnabled : true
                             cursorShape : Qt.PointingHandCursor
                             Layout.fillHeight : true
-                            property var contentWidth: Math.max(implicitBackgroundWidth + leftInset + rightInset, implicitContentWidth + leftPadding + rightPadding)
-                            implicitWidth : Math.max(contentWidth, screensListView.visibilityColumnWidth)
-                            Component.onCompleted : screensListView.visibilityColumnWidth = Math.max(implicitWidth, screensListView.visibilityColumnWidth)
+                            Layout.minimumWidth: screensListView.colorColumnWidth
+                            Layout.preferredWidth: screensListView.colorColumnWidth
+                            
+                            Component.onCompleted: screensListView.colorColumnWidth = Math.max(implicitWidth, screensListView.colorColumnWidth)
+
                             onClicked : {
-                                colorDialog.color = screenColor;
+                                colorDialog.selectedColor = screenColor;
                                 colorDialog.open();
                             }
 
@@ -193,7 +179,7 @@ KCM.SimpleKCM {
                                 onAccepted : {
                                     screenListModel.set(index, {
                                         screenName: screenName,
-                                        screenColor: colorDialog.color
+                                        screenColor: colorDialog.selectedColor
                                     });
                                     ScreensJS.saveConfig();
                                 }
@@ -201,14 +187,10 @@ KCM.SimpleKCM {
                         }
 
                         RowLayout {
-                            property var contentWidth: Math.max(implicitBackgroundWidth + leftInset + rightInset, implicitContentWidth + leftPadding + rightPadding)
-                            implicitWidth : Math.max(contentWidth, screensListView.visibilityColumnWidth)
-                            Component.onCompleted : screensListView.visibilityColumnWidth = Math.max(implicitWidth, screensListView.visibilityColumnWidth)
-
                             Button {
                                 enabled : index != 0
                                 icon.name : "up"
-                                onClicked : {
+                                onClicked: {
                                     screenListModel.move(index, index - 1, 1);
                                     ScreensJS.saveConfig();
                                 }
@@ -216,7 +198,7 @@ KCM.SimpleKCM {
                             Button {
                                 enabled : index != (screenListModel.count - 1)
                                 icon.name : "down"
-                                onClicked : {
+                                onClicked: {
                                     screenListModel.move(index, index + 1, 1);
                                     ScreensJS.saveConfig();
                                 }

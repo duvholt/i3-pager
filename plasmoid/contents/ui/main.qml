@@ -7,6 +7,7 @@ import org.kde.plasma.plasmoid
 import org.kde.kirigami as Kirigami
 import org.kde.private.I3Pager
 
+
 PlasmoidItem {
     id : root
     readonly property color defaultWorkspace : "transparent"
@@ -15,7 +16,7 @@ PlasmoidItem {
     readonly property color urgentWorkspace : Kirigami.Theme.negativeTextColor
     readonly property color mouseWorkspace : Kirigami.Theme.linkColor
 
-    preferredRepresentation : Plasmoid.fullRepresentation
+    preferredRepresentation : fullRepresentation
 
     ColumnLayout {
         id : rootColumnLayout
@@ -160,7 +161,7 @@ PlasmoidItem {
                             minimumPixelSize : Kirigami.Theme.smallFont.pixelSize
                             font.pixelSize : Math.min(textRow.height * 0.5, 1.5 * Kirigami.Theme.defaultFont.pixelSize)
                             fontSizeMode : Text.VerticalFit
-                            font.family : "Font Awesome 5 Free Solid"
+                            font.family : "Font Awesome"
                             font.styleName : "Solid"
                             color : Kirigami.Theme.textColor
                             text : modelData.icon
@@ -199,7 +200,7 @@ PlasmoidItem {
                     rightPadding : 10
                     leftPadding : 10
                     minimumPixelSize : Kirigami.Theme.smallFont.pixelSize
-                    font.pixelSize : Math.min(textRow.height * 0.5, 1.5 * Kirigami.Theme.defaultFont.pixelSize)
+                    font.pixelSize : Math.min(root.height * 0.5, 1.5 * Kirigami.Theme.defaultFont.pixelSize)
                     fontSizeMode : Text.VerticalFit
                     font.family : Kirigami.Theme.defaultFont.family
                     color : "#333333"
