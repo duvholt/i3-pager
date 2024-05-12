@@ -1,14 +1,16 @@
 import QtQuick 2.15
-import QtQuick.Controls
-import Qt.labs.qmlmodels
-import QtQml.Models
-import QtQuick.Layouts
+import QtQuick.Controls as QQC2
 import QtQuick.Dialogs
-import org.kde.kirigami as Kirigami
-import org.kde.kirigami.delegates as KirigamiDelegates
+import QtQuick.Layouts 1.3
+
+import org.kde.plasma.plasmoid 2.0
+import org.kde.kquickcontrols 2.0 as KQC
+import org.kde.kirigami 2.10 as Kirigami
+import org.kde.kitemmodels 1.0
+import org.kde.kcmutils as KCM
+
 import org.kde.private.I3Pager
 import "screens.js" as ScreensJS
-import org.kde.kcmutils as KCM
 
 KCM.ScrollViewKCM {
 
@@ -36,13 +38,14 @@ KCM.ScrollViewKCM {
     property var cfg_showWorkspaceNames
 
     id: page
+    Layout.fillWidth: true
 
     I3Pager {
         id: i3pager
     }
 
     header: Kirigami.FormLayout {
-        CheckBox {
+        QQC2.CheckBox {
             Kirigami.FormData.label: i18n("Color workspaces by screen:")
 
             id: colorWorkspaceByScreen
@@ -53,12 +56,12 @@ KCM.ScrollViewKCM {
         RowLayout {
             Kirigami.FormData.label: i18n("Workspace color opacity:")
 
-            Slider {
+            QQC2.Slider {
                 id: screenColorOpacity
                 from: 0
                 to: 1
                 stepSize: 0.05
-                snapMode: Slider.SnapAlways
+                snapMode: QQC2.Slider.SnapAlways
                 value: cfg_screenColorOpacity
                 onMoved: {
                     cfg_screenColorOpacity = value;
@@ -66,7 +69,7 @@ KCM.ScrollViewKCM {
                 }
             }
 
-            SpinBox {
+            QQC2.SpinBox {
                 from: 0
                 to: 100
                 stepSize: 5
@@ -83,8 +86,8 @@ KCM.ScrollViewKCM {
         id: screensListView
         clip: true
 
-        property real colorColumnWidth: 40
-        property real actionsColumnWidth: 90
+        property real colorColumnWidth: Kirigami.Units.gridUnit
+        property real actionsColumnWidth: Kirigami.Units.gridUnit
 
         Component.onCompleted: {
             ScreensJS.loadConfig();
@@ -96,6 +99,7 @@ KCM.ScrollViewKCM {
             id: screenListModel
             dynamicRoles: true
         }
+        reuseItems: true
 
         header: RowLayout {
             width: screensListView.width
@@ -112,81 +116,88 @@ KCM.ScrollViewKCM {
                 textFormat: Text.PlainText
                 level: 2
                 Layout.preferredWidth: screensListView.colorColumnWidth
+                Component.onCompleted: screensListView.colorColumnWidth = Math.max(implicitWidth, screensListView.colorColumnWidth)
             }
             Kirigami.Heading {
                 text: i18n("Actions")
                 level: 2
                 Layout.preferredWidth: screensListView.actionsColumnWidth
+                Component.onCompleted: screensListView.actionsColumnWidth = Math.max(implicitWidth, screensListView.actionsColumnWidth)
             }
         }
 
-        delegate: ItemDelegate {
+        delegate: QQC2.ItemDelegate {
             highlighted: false
             hoverEnabled: false
             down: false
             width: screensListView.width
-            spacing: Kirigami.Units.smallSpacing
 
-            contentItem: RowLayout {
-                width: screensListView.width
-                spacing: Kirigami.Units.smallSpacing
-
-                Label {
-                    Layout.fillWidth: true
-                    text: screenName
-                }
-
-                MouseArea {
-                    hoverEnabled: true
-                    cursorShape: Qt.PointingHandCursor
-                    Layout.fillHeight: true
-                    Layout.minimumWidth: screensListView.colorColumnWidth
-                    Layout.preferredWidth: screensListView.colorColumnWidth
-
-                    onClicked: {
-                        colorDialog.selectedColor = screenColor;
-                        colorDialog.open();
-                    }
-
-                    Rectangle {
-                        id: colorRectangle
-                        width: parent.width
-                        height: parent.height
-                        color: screenColor
-                    }
-
-                    ColorDialog {
-                        id: colorDialog
-                        title: "Please choose a screen color"
-                        onAccepted: {
-                            screenListModel.set(index, {
-                                screenName: screenName,
-                                screenColor: colorDialog.selectedColor
-                            });
-                            ScreensJS.saveConfig();
-                        }
-                    }
-                }
+            contentItem: FocusScope {
+                implicitHeight: childrenRect.height
 
                 RowLayout {
-                    Layout.minimumWidth: screensListView.actionsColumnWidth
-                    Layout.preferredWidth: screensListView.actionsColumnWidth
+                    width: parent.width
+                    spacing: Kirigami.Units.smallSpacing
 
-                    Button {
-                        enabled: index != 0
-                        icon.name: "arrow-up"
+                    QQC2.Label {
+                        Layout.fillWidth: true
+                        text: screenName
+                    }
+
+                    MouseArea {
+                        hoverEnabled: true
+                        cursorShape: Qt.PointingHandCursor
+                        Layout.fillHeight: true
+                        Layout.minimumWidth: screensListView.colorColumnWidth
+                        Layout.preferredWidth: screensListView.colorColumnWidth
+                        Component.onCompleted: screensListView.colorColumnWidth = Math.max(implicitWidth, screensListView.colorColumnWidth)
+
                         onClicked: {
-                            screenListModel.move(index, index - 1, 1);
-                            ScreensJS.saveConfig();
+                            colorDialog.selectedColor = screenColor;
+                            colorDialog.open();
+                        }
+
+                        Rectangle {
+                            id: colorRectangle
+                            width: parent.width
+                            height: parent.height
+                            color: screenColor
+                        }
+
+                        ColorDialog {
+                            id: colorDialog
+                            title: "Please choose a screen color"
+                            onAccepted: {
+                                screenListModel.set(index, {
+                                    screenName: screenName,
+                                    screenColor: colorDialog.selectedColor
+                                });
+                                ScreensJS.saveConfig();
+                            }
                         }
                     }
-                    Button {
-                        enabled: index != (screenListModel.count - 1)
-                        icon.name: "arrow-down"
 
-                        onClicked: {
-                            screenListModel.move(index, index + 1, 1);
-                            ScreensJS.saveConfig();
+                    RowLayout {
+                        Layout.minimumWidth: screensListView.actionsColumnWidth
+                        Layout.preferredWidth: screensListView.actionsColumnWidth
+                        Component.onCompleted: screensListView.actionsColumnWidth = Math.max(implicitWidth, screensListView.actionsColumnWidth)
+
+                        QQC2.Button {
+                            enabled: index != 0
+                            icon.name: "arrow-up"
+                            onClicked: {
+                                screenListModel.move(index, index - 1, 1);
+                                ScreensJS.saveConfig();
+                            }
+                        }
+                        QQC2.Button {
+                            enabled: index != (screenListModel.count - 1)
+                            icon.name: "arrow-down"
+
+                            onClicked: {
+                                screenListModel.move(index, index + 1, 1);
+                                ScreensJS.saveConfig();
+                            }
                         }
                     }
                 }
