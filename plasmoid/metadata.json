@@ -4,7 +4,12 @@
             {
                 "Email": "christian@duvholt.net",
                 "Name": "Christian duvholt"
+            },
+            {
+                "Email": "bjorn.bidar@thaodan.de",
+                "Name": "Björn Bidar"
             }
+
         ],
         "Description": "i3 Pager",
         "Id": "org.kde.I3Pager",
@@ -14,7 +19,7 @@
             "Plasma/Applet"
         ],
         "Version": "1.0",
-        "Website": "plasma.kde.org"
+        "Website": "https://github.com/duvholt/i3-pager"
     },
     "X-Plasma-API": "declarativeappletscript",
     "X-Plasma-API-Minimum-Version": "6.0",
