@@ -18,6 +18,8 @@ PlasmoidItem {
 
     preferredRepresentation : fullRepresentation
 
+    Layout.minimumWidth: workspaceRow.implicitWidth + Kirigami.Units.smallSpacing
+
     ColumnLayout {
         id : rootColumnLayout
 
