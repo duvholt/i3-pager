@@ -100,7 +100,8 @@ KCM.SimpleKCM {
                 id : screensListView
                 clip : true
 
-                property real colorColumnWidth: Kirigami.Units.gridUnit
+                property real colorColumnWidth: 40
+                property real actionsColumnWidth: 90
 
                 Component.onCompleted : {
                     ScreensJS.loadConfig();
@@ -113,38 +114,38 @@ KCM.SimpleKCM {
                     dynamicRoles : true
                 }
 
-                header : Kirigami.ListSectionHeader {
-                    hoverEnabled : false
-                    implicitWidth: contentItem ? contentItem.implicitWidth + leftPadding + rightPadding : Kirigami.Units.gridUnit * 12
-                    width: parent && parent.width > 0 ? parent.width : implicitWidth
+                header: RowLayout {
+                    width: screensListView.width
+                    spacing: Kirigami.Units.smallSpacing
 
-                    RowLayout {
-                        Kirigami.Heading {
-                            text : i18n("Name")
-                            level : 2
-                            Layout.fillWidth : true
-                        }
-                        Kirigami.Heading {
-                            text : i18n("Color")
-                            level : 2
-                            Layout.preferredWidth : screensListView.colorColumnWidth
-                            Component.onCompleted : screensListView.colorColumnWidth = Math.max(implicitWidth, screensListView.colorColumnWidth)
-                        }
-                        Kirigami.Heading {
-                            text : i18n("Actions")
-                            level : 2
-                        }
+                    Kirigami.Heading {
+                        text : i18n("Name")
+                        textFormat: Text.PlainText
+                        level : 2
+                        Layout.fillWidth : true
+                    }
+                    Kirigami.Heading {
+                        text : i18n("Color")
+                        textFormat: Text.PlainText
+                        level : 2
+                        Layout.preferredWidth : screensListView.colorColumnWidth
+                    }
+                    Kirigami.Heading {
+                        text : i18n("Actions")
+                        level : 2
+                        Layout.preferredWidth : screensListView.actionsColumnWidth
                     }
                 }
 
                 delegate: ItemDelegate {
-                    highlighted : false
-                    hoverEnabled : false
+                    highlighted: false
+                    hoverEnabled: false
+                    down: false
                     width: screensListView.width
-                    opacity: 1
-
+                    spacing: Kirigami.Units.smallSpacing
+                    
                     contentItem : RowLayout {
-                        width: parent.width
+                        width: screensListView.width
                         spacing: Kirigami.Units.smallSpacing
 
                         Label {
@@ -158,8 +159,6 @@ KCM.SimpleKCM {
                             Layout.fillHeight : true
                             Layout.minimumWidth: screensListView.colorColumnWidth
                             Layout.preferredWidth: screensListView.colorColumnWidth
-                            
-                            Component.onCompleted: screensListView.colorColumnWidth = Math.max(implicitWidth, screensListView.colorColumnWidth)
 
                             onClicked : {
                                 colorDialog.selectedColor = screenColor;
@@ -187,6 +186,9 @@ KCM.SimpleKCM {
                         }
 
                         RowLayout {
+                            Layout.minimumWidth: screensListView.actionsColumnWidth
+                            Layout.preferredWidth: screensListView.actionsColumnWidth
+
                             Button {
                                 enabled : index != 0
                                 icon.name : "up"
