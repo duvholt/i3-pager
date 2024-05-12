@@ -1,4 +1,15 @@
+/*  -*- c++ -*-
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ *
+ */
+
 #include "i3pager.h"
+
+#include <i3ipc++/ipc.hpp>
+#include "i3listener.h"
+#include <future>
+#include <QDebug>
+
 
 I3Pager::I3Pager(QObject* parent)
     : QObject(parent) {

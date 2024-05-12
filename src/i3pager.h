@@ -1,18 +1,15 @@
-#ifndef I3PAGER_PLASMOID_H
-#define I3PAGER_PLASMOID_H
+/*  -*- c++ -*-
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ *
+ */
 
-#include "i3listener.h"
+#pragma once
+
 #include "workspace.h"
-#include <QApplication>
-#include <QDebug>
-#include <QGuiApplication>
-#include <QMetaType>
-#include <QScreen>
-#include <QVariant>
-#include <QtConcurrent/QtConcurrent>
-#include <QtCore/QObject>
-#include <future>
-#include <i3ipc++/ipc.hpp>
+#include <QObject>
+
+class I3ListenerThread;
+class Workspace;
 
 class I3Pager : public QObject {
     Q_OBJECT
@@ -42,5 +39,3 @@ private:
     QString currentScreenPrivate;
     QString mode;
 };
-
-#endif //I3PAGER_PLASMOID_H

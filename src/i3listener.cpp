@@ -1,4 +1,13 @@
+/*  -*- c++ -*-
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ *
+ */
+
 #include "i3listener.h"
+#include <QDebug>
+#include <QLocalSocket>
+#include <QSocketNotifier>
+#include <i3ipc++/ipc.hpp>
 
 I3ListenerThread::I3ListenerThread(QObject* parent)
     : QThread(parent) {

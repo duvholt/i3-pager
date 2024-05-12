@@ -1,5 +1,11 @@
+/*  -*- c++ -*-
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ *
+ */
+
 #include "workspace.h"
 #include <algorithm>
+#include <QDebug>
 
 QList<Workspace> Workspace::filterByCurrentScreen(QList<Workspace> inputWorkspaces, QString currentScreen) {
     QList<Workspace> outputWorkspaces;

@@ -1,12 +1,11 @@
-#ifndef I3LISTENER_H
-#define I3LISTENER_H
+/*  -*- c++ -*-
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ *
+ */
 
-#include <QDebug>
-#include <QLocalSocket>
-#include <QSocketNotifier>
+#pragma  once
+
 #include <QThread>
-#include <QtCore/QObject>
-#include <i3ipc++/ipc.hpp>
 
 class I3ListenerThread : public QThread {
     Q_OBJECT
@@ -24,5 +23,3 @@ private:
     bool stopping = false;
     void handleI3Events();
 };
-
-#endif //I3LISTENER_H
