@@ -13,7 +13,7 @@
         ],
         "Description": "i3 Pager",
         "Id": "org.kde.I3Pager",
-        "License": "GPL",
+        "License": "GPL-3.0-or-later",
         "Name": "i3Pager",
         "ServiceTypes": [
             "Plasma/Applet"
