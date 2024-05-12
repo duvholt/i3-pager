@@ -6,6 +6,7 @@
 #include "i3pager.h"
 
 #include <i3ipc++/ipc.hpp>
+#include "i3pager_debug.h"
 #include "i3listener.h"
 #include <future>
 #include <QDebug>
@@ -16,7 +17,7 @@ I3Pager::I3Pager(QObject* parent)
     currentScreenPrivate = QString();
     mode = "default";
 
-    qDebug() << "Starting i3 listener";
+    qCDebug(I3PAGER) << "Starting i3 listener";
     this->i3ListenerThread = new I3ListenerThread(this);
     connect(i3ListenerThread, &I3ListenerThread::modeChanged, this, [=](const QString& mode) {
         this->mode = mode;
@@ -27,14 +28,14 @@ I3Pager::I3Pager(QObject* parent)
     });
     connect(i3ListenerThread, &I3ListenerThread::finished, i3ListenerThread, &QObject::deleteLater);
     i3ListenerThread->start();
-    qDebug() << "i3 listener started";
+    qCDebug(I3PAGER) << "i3 listener started";
 }
 
 I3Pager::~I3Pager() {
-    qDebug() << "I3Pager destructor";
+    qCDebug(I3PAGER) << "I3Pager destructor";
     this->i3ListenerThread->stop();
     this->i3ListenerThread->wait();
-    qDebug() << "I3Pager destructor done";
+    qCDebug(I3PAGER) << "I3Pager destructor done";
 }
 
 QList<QString> I3Pager::getScreenNames() {
@@ -46,11 +47,11 @@ QList<QString> I3Pager::getScreenNames() {
         for (auto& screen : screens) {
             if (screen->active) {
                 screenList.append(QString::fromStdString(screen->name));
-                qDebug() << "Screen name:" << QString::fromStdString(screen->name);
+                qCDebug(I3PAGER) << "Screen name:" << QString::fromStdString(screen->name);
             }
         }
     } catch (std::exception const& e) {
-        qWarning() << "Exception while retrieving screen names: " << e.what();
+        qCWarning(I3PAGER) << "Exception while retrieving screen names: " << e.what();
     }
 
     return screenList;
@@ -61,7 +62,7 @@ QList<Workspace> I3Pager::getWorkspaces(bool filterByCurrentScreen, QString orde
     try {
         i3ipc::connection conn;
         auto i3workspaceList = conn.get_workspaces();
-        qDebug() << "Loading workspaces:";
+        qCDebug(I3PAGER) << "Loading workspaces:";
 
         for (auto& i3workspace : i3workspaceList) {
             Workspace workspace;
@@ -77,8 +78,8 @@ QList<Workspace> I3Pager::getWorkspaces(bool filterByCurrentScreen, QString orde
             workspace.visible = i3workspace->visible;
             workspace.urgent = i3workspace->urgent;
 
-            qDebug() << "i3Workspace name:" << QString::fromStdString(i3workspace->name);
-            qDebug() << "Workspace:"
+            qCDebug(I3PAGER) << "i3Workspace name:" << QString::fromStdString(i3workspace->name);
+            qCDebug(I3PAGER) << "Workspace:"
                     << "id:" << workspace.id
                     << "index:" << workspace.index
                     << "name:" << workspace.name
@@ -90,7 +91,7 @@ QList<Workspace> I3Pager::getWorkspaces(bool filterByCurrentScreen, QString orde
             workspaceList.append(workspace);
         }
     } catch (std::exception const& e) {
-        qWarning() << "Exception while retrieving workspaces:" << e.what();
+        qCWarning(I3PAGER) << "Exception while retrieving workspaces:" << e.what();
     }
 
     if (filterByCurrentScreen) {
