@@ -9,24 +9,24 @@ import org.kde.private.I3Pager
 
 
 PlasmoidItem {
-    id : root
-    readonly property color defaultWorkspace : "transparent"
-    readonly property color focusedWorkspace : Kirigami.Theme.positiveTextColor
-    readonly property color visibleWorkspace : Kirigami.Theme.neutralTextColor
-    readonly property color urgentWorkspace : Kirigami.Theme.negativeTextColor
-    readonly property color mouseWorkspace : Kirigami.Theme.linkColor
+    id: root
+    readonly property color defaultWorkspace: "transparent"
+    readonly property color focusedWorkspace: Kirigami.Theme.positiveTextColor
+    readonly property color visibleWorkspace: Kirigami.Theme.neutralTextColor
+    readonly property color urgentWorkspace: Kirigami.Theme.negativeTextColor
+    readonly property color mouseWorkspace: Kirigami.Theme.linkColor
 
-    preferredRepresentation : fullRepresentation
+    preferredRepresentation: fullRepresentation
 
     Layout.minimumWidth: workspaceRow.implicitWidth + Kirigami.Units.smallSpacing
 
     ColumnLayout {
-        id : rootColumnLayout
+        id: rootColumnLayout
 
         I3Pager {
-            id : i3pager
-            currentScreen : Screen.name
-            onWorkspacesChanged : {
+            id: i3pager
+            currentScreen: Screen.name
+            onWorkspacesChanged: {
                 updateWorkspaces();
             }
             function updateWorkspaces() {
@@ -39,7 +39,7 @@ PlasmoidItem {
         }
 
         Connections {
-            target : plasmoid.configuration
+            target: plasmoid.configuration
             function onFilterByCurrentScreenChanged() {
                 i3pager.updateWorkspaces();
             }
@@ -55,27 +55,27 @@ PlasmoidItem {
         }
 
         // Hack to update current screen
-        Screen.onNameChanged : {
+        Screen.onNameChanged: {
             i3pager.currentScreen = Screen.name
         }
 
         Row {
-            id : workspaceRow
-            Layout.alignment : Layout.AlignVCenter | Layout.AlignHCenter
-            spacing : 2
+            id: workspaceRow
+            Layout.alignment: Layout.AlignVCenter | Layout.AlignHCenter
+            spacing: 2
 
             Repeater {
-                id : repeater
+                id: repeater
 
                 MouseArea {
-                    id : mouseArea
-                    hoverEnabled : true
-                    cursorShape : Qt.PointingHandCursor
-                    onClicked : {
+                    id: mouseArea
+                    hoverEnabled: true
+                    cursorShape: Qt.PointingHandCursor
+                    onClicked: {
                         i3pager.activateWorkspace(modelData.id)
                     }
-                    width : textRow.width
-                    height : root.height
+                    width: textRow.width
+                    height: root.height
                     function getIndicatorColor() {
                         if (mouseArea.containsMouse) {
                             return mouseWorkspace;
@@ -99,30 +99,30 @@ PlasmoidItem {
                         return screenColor;
                     }
                     function getRadius() {
-                        return plasmoid.configuration.rounded ? 3 : 0;
+                        return plasmoid.configuration.rounded ? 3: 0;
                     }
 
                     Rectangle { // Border style
-                        visible : plasmoid.configuration.style === "border"
-                        color : mouseArea.getFillColor()
-                        radius : getRadius()
-                        height : textRow.height
-                        width : textRow.width
+                        visible: plasmoid.configuration.style === "border"
+                        color: mouseArea.getFillColor()
+                        radius: getRadius()
+                        height: textRow.height
+                        width: textRow.width
                         border {
-                            width : 2
-                            color : mouseArea.getIndicatorColor()
+                            width: 2
+                            color: mouseArea.getIndicatorColor()
                         }
                     }
 
                     Rectangle { // Underline style
-                        visible : plasmoid.configuration.style === "line"
-                        color : mouseArea.getFillColor()
-                        radius : getRadius()
-                        height : textRow.height
-                        width : textRow.width
+                        visible: plasmoid.configuration.style === "line"
+                        color: mouseArea.getFillColor()
+                        radius: getRadius()
+                        height: textRow.height
+                        width: textRow.width
 
                         Rectangle {
-                            Component.onCompleted : {
+                            Component.onCompleted: {
                                 if (plasmoid.configuration.indicatorPosition === "top") {
                                     anchors.top = parent.top;
                                 } else {
@@ -130,83 +130,83 @@ PlasmoidItem {
                                 }
                             }
 
-                            height : 5
-                            width : textRow.width
-                            radius : getRadius()
-                            color : mouseArea.getIndicatorColor()
+                            height: 5
+                            width: textRow.width
+                            radius: getRadius()
+                            color: mouseArea.getIndicatorColor()
                         }
                     }
 
                     RowLayout {
-                        id : textRow
-                        height : parent.height
+                        id: textRow
+                        height: parent.height
 
                         Rectangle {
-                            width : 5
+                            width: 5
                         }
                         Text {
-                            font.family : Kirigami.Theme.defaultFont.family
-                            height : textRow.height
-                            minimumPixelSize : Kirigami.Theme.smallFont.pixelSize
-                            font.pixelSize : Math.min(textRow.height * 0.5, 1.5 * Kirigami.Theme.defaultFont.pixelSize)
-                            fontSizeMode : Text.VerticalFit
-                            color : Kirigami.Theme.textColor
-                            text : modelData.index
-                            verticalAlignment : Text.AlignHCenter
+                            font.family: Kirigami.Theme.defaultFont.family
+                            height: textRow.height
+                            minimumPixelSize: Kirigami.Theme.smallFont.pixelSize
+                            font.pixelSize: Math.min(textRow.height * 0.5, 1.5 * Kirigami.Theme.defaultFont.pixelSize)
+                            fontSizeMode: Text.VerticalFit
+                            color: Kirigami.Theme.textColor
+                            text: modelData.index
+                            verticalAlignment: Text.AlignHCenter
                         }
                         Label {
-                            id : icon
-                            rightPadding : 3
-                            leftPadding : 3
-                            bottomPadding : 0
-                            height : textRow.height
-                            minimumPixelSize : Kirigami.Theme.smallFont.pixelSize
-                            font.pixelSize : Math.min(textRow.height * 0.5, 1.5 * Kirigami.Theme.defaultFont.pixelSize)
-                            fontSizeMode : Text.VerticalFit
-                            font.family : "Font Awesome"
-                            font.styleName : "Solid"
-                            color : Kirigami.Theme.textColor
-                            text : modelData.icon
-                            verticalAlignment : Text.AlignHCenter
-                            visible : plasmoid.configuration.showWorkspaceNames
+                            id: icon
+                            rightPadding: 3
+                            leftPadding: 3
+                            bottomPadding: 0
+                            height: textRow.height
+                            minimumPixelSize: Kirigami.Theme.smallFont.pixelSize
+                            font.pixelSize: Math.min(textRow.height * 0.5, 1.5 * Kirigami.Theme.defaultFont.pixelSize)
+                            fontSizeMode: Text.VerticalFit
+                            font.family: "Font Awesome"
+                            font.styleName: "Solid"
+                            color: Kirigami.Theme.textColor
+                            text: modelData.icon
+                            verticalAlignment: Text.AlignHCenter
+                            visible: plasmoid.configuration.showWorkspaceNames
                         }
                         Text {
-                            height : textRow.height
-                            minimumPixelSize : Kirigami.Theme.smallFont.pixelSize
-                            font.pixelSize : Math.min(textRow.height * 0.5, 1.5 * Kirigami.Theme.defaultFont.pixelSize)
-                            fontSizeMode : Text.VerticalFit
-                            font.family : Kirigami.Theme.defaultFont.family
-                            color : Kirigami.Theme.textColor
-                            text : modelData.name
-                            verticalAlignment : Text.AlignHCenter
-                            visible : plasmoid.configuration.showWorkspaceNames
+                            height: textRow.height
+                            minimumPixelSize: Kirigami.Theme.smallFont.pixelSize
+                            font.pixelSize: Math.min(textRow.height * 0.5, 1.5 * Kirigami.Theme.defaultFont.pixelSize)
+                            fontSizeMode: Text.VerticalFit
+                            font.family: Kirigami.Theme.defaultFont.family
+                            color: Kirigami.Theme.textColor
+                            text: modelData.name
+                            verticalAlignment: Text.AlignHCenter
+                            visible: plasmoid.configuration.showWorkspaceNames
                         }
                         Rectangle {
-                            width : 5
+                            width: 5
                         }
                     }
                 }
             }
             Item {
-                width : modeText.width
-                height : modeText.height
-                anchors.verticalCenter : parent.verticalCenter
-                visible : i3pager.mode !== "default"
+                width: modeText.width
+                height: modeText.height
+                anchors.verticalCenter: parent.verticalCenter
+                visible: i3pager.mode !== "default"
                 Rectangle {
-                    color : "#e5c07b"
-                    height : parent.height
-                    width : parent.width
+                    color: "#e5c07b"
+                    height: parent.height
+                    width: parent.width
                 }
                 Text {
-                    id : modeText
-                    rightPadding : 10
-                    leftPadding : 10
-                    minimumPixelSize : Kirigami.Theme.smallFont.pixelSize
-                    font.pixelSize : Math.min(root.height * 0.5, 1.5 * Kirigami.Theme.defaultFont.pixelSize)
-                    fontSizeMode : Text.VerticalFit
-                    font.family : Kirigami.Theme.defaultFont.family
-                    color : "#333333"
-                    text : i3pager.mode
+                    id: modeText
+                    rightPadding: 10
+                    leftPadding: 10
+                    minimumPixelSize: Kirigami.Theme.smallFont.pixelSize
+                    font.pixelSize: Math.min(root.height * 0.5, 1.5 * Kirigami.Theme.defaultFont.pixelSize)
+                    fontSizeMode: Text.VerticalFit
+                    font.family: Kirigami.Theme.defaultFont.family
+                    color: "#333333"
+                    text: i3pager.mode
                 }
             }
         }
