@@ -31,8 +31,6 @@ KCM.SimpleKCM {
 
     Kirigami.FormLayout {
         id: page
-        width: childrenRect.width
-        height: childrenRect.height
 
         ColumnLayout {
             Kirigami.FormData.label: i18n("Basic:")
