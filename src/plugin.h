@@ -1,8 +1,9 @@
-#ifndef I3PAGER_PLASMOID_PLUGIN_H
-#define I3PAGER_PLASMOID_PLUGIN_H
+/*  -*- c++ -*-
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ *
+ */
 
-#include "i3pager.h"
-#include "workspace.h"
+#pragma once
 
 #include <QQmlExtensionPlugin>
 
@@ -14,5 +15,3 @@ class Plugin : public QQmlExtensionPlugin {
 public:
     void registerTypes(const char* uri) override;
 };
-
-#endif //I3PAGER_PLASMOID_PLUGIN_H

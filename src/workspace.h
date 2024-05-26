@@ -1,8 +1,11 @@
-#ifndef WORKSPACE_H
-#define WORKSPACE_H
+/*  -*- c++ -*-
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ *
+ */
 
-#include <QDebug>
-#include <QtCore/QObject>
+#pragma once
+
+#include <QObject>
 
 class Workspace {
     Q_GADGET
@@ -29,5 +32,3 @@ public:
 };
 
 Q_DECLARE_METATYPE(Workspace)
-
-#endif //WORKSPACE_H

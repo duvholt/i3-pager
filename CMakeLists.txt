@@ -12,6 +12,7 @@ set(KF_MAJOR_VERSION "6")
 
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR} ${CMAKE_MODULE_PATH})
 
+include(ECMQtDeclareLoggingCategory)
 include(KDEInstallDirs)
 include(KDECMakeSettings)
 include(KDECompilerSettings)

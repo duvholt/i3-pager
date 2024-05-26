@@ -8,6 +8,14 @@ set(I3PagerPlugin_SRCS
         workspace.cpp
         workspace.h)
 
+ecm_qt_declare_logging_category(I3PagerPlugin_SRCS
+  HEADER i3pager_debug.h
+  IDENTIFIER I3PAGER
+  CATEGORY_NAME org.kde.I3Pager
+  DESCRIPTION "I3Pager Plasmoid"
+  EXPORT I3Pager
+)
+
 add_library(I3PagerPlugin SHARED ${I3PagerPlugin_SRCS})
 target_compile_options(I3PagerPlugin PRIVATE -fexceptions)
 
@@ -31,3 +39,6 @@ target_link_libraries(I3PagerPlugin
 # install plugin
 install(TARGETS  I3PagerPlugin DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/private/I3Pager)
 install(FILES qmldir DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/private/I3Pager)
+ecm_qt_install_logging_categories(EXPORT I3PAGER
+  FILE org.kde.i3pager.categories
+  DESTINATION ${KDE_INSTALL_LOGGINGCATEGORIESDIR})

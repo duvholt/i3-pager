@@ -1,4 +1,14 @@
+/*  -*- c++ -*-
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ *
+ */
+
 #include "i3listener.h"
+#include "i3pager_debug.h"
+#include <QDebug>
+#include <QLocalSocket>
+#include <QSocketNotifier>
+#include <i3ipc++/ipc.hpp>
 
 I3ListenerThread::I3ListenerThread(QObject* parent)
     : QThread(parent) {
@@ -19,9 +29,9 @@ void I3ListenerThread::handleI3Events() {
 
         // Workspace events handler
         conn.signal_workspace_event.connect([this](const i3ipc::workspace_event_t& ev) {
-            qDebug() << "workspace_event: " << (char)ev.type;
+            qCDebug(I3PAGER) << "workspace_event: " << (char)ev.type;
             if (ev.current) {
-                qDebug() << "\tSwitched to #" << ev.current->num << " - \"" << QString::fromStdString(ev.current->name) << '"';
+                qCDebug(I3PAGER) << "\tSwitched to #" << ev.current->num << " - \"" << QString::fromStdString(ev.current->name) << '"';
                 Q_EMIT workspacesChanged();
             }
         });
@@ -29,7 +39,7 @@ void I3ListenerThread::handleI3Events() {
         // Mode events handler
         conn.signal_mode_event.connect([this](const i3ipc::mode_t& i3mode) {
             const auto mode = QString::fromStdString(i3mode.change);
-            qDebug() << "mode: " << mode;
+            qCDebug(I3PAGER) << "mode: " << mode;
             Q_EMIT modeChanged(mode);
         });
 
@@ -37,7 +47,7 @@ void I3ListenerThread::handleI3Events() {
             conn.handle_event();
         }
     } catch (std::exception const& e) {
-        qWarning() << "Exception in i3listener handle events:" << e.what();
+        qCWarning(I3PAGER) << "Exception in i3listener handle events:" << e.what();
     }
 }
 
