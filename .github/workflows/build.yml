@@ -4,8 +4,17 @@ on: [push]
 
 jobs:
   build:
-    name: Linux Latest x64
-    runs-on: ubuntu-24.04
+    strategy:
+      matrix:
+        os: [ubuntu-22.04, ubuntu-24.04]
+        libsigcpp: ["libsigc++-2.0-dev"]
+        include:
+          # libsigc++-3.0 is not available on ubuntu 22.04
+          - os: ubuntu-24.04
+            libsigcpp: "libsigc++-3.0-dev"
+    runs-on: ${{ matrix.os }}
+
+    name: Build on ${{ matrix.os }} with ${{ matrix.libsigcpp }}
 
     steps:
     - uses: actions/checkout@v2
@@ -15,7 +24,7 @@ jobs:
     - name: Installing system libs
       run: |
         sudo apt update
-        sudo apt install libkf5plasma-dev extra-cmake-modules qtbase5-dev qtdeclarative5-dev libsigc++-3.0-dev libjsoncpp-dev i3-wm
+        sudo apt install libkf5plasma-dev extra-cmake-modules qtbase5-dev qtdeclarative5-dev ${{matrix.libsigcpp}} libjsoncpp-dev i3-wm
 
     - name: Configure
       run: cmake -DCMAKE_INSTALL_PREFIX=$(kf5-config --prefix) -DCI_ERRORS=on -B build .
